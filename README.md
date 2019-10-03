@@ -6,7 +6,7 @@ so in that… man, where do i start... i've been searching (for years) for a solut
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
 before es6, i started to appreciate javascript modules. i then tried [angularjs](https://angularjs.org/); [angular](https://angular.io/); [vuejs](https://vuejs.org/); [reactjs](https://reactjs.org/); ...
 
-all great frameworks, but none implemented the way i wanted. i decided to write my own framework, and at the time, wanted to use it in projects for my employer.
+all excellent frameworks, but none implemented the way i wanted. i decided to write my own framework, and at the time, wanted to use it in projects for my employer.
 that initiative came to a screeching halt when my employer wanted to claim ownership to the framework. dang! what to do...? i needed to use an existing framework in my employer's projects.
 
 go back to angular... too much overhead for me. break out the react...? call me old school, i hated mixing html into code. i needed them separated. loved knockout, but i needed a more modern approach. so i chose vue.
@@ -14,7 +14,7 @@ can i make vue work for me? i had to figure this out.
 
 ##### what are my desires?
 
-- i wanted to develop in **typescript** like angular.
+- i wanted to develop in **typescript**.
 - preferred to use amd browser loader like **[requirejs](https://requirejs.org/)**.
 - i felt **ioc dependency injection** can be controlled by the browser's module loader, but i wanted an ioc container in my server code.
 - i didn't want to maintain code to **register the application components**. components should be able to register themselves.
