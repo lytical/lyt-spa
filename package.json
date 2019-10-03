@@ -49,7 +49,7 @@
   "name": "@lytical/lyt-spa",
   "repository": {
     "type": "git",
-    "url": "https://lytical@dev.azure.com/lytical/hermes/_git/node-vue"
+    "url": "https://github.com/lytical/lyt-spa.git"
   },
   "scripts": {
     "build": "tsc --build cli api",

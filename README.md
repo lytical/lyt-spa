@@ -26,3 +26,12 @@ can i make vue work for me? i had to figure this out.
 ## introduction
 i introduce to you **lyt-spa**. a comprehensive solution to single page web applications.
 the repository [**github repository**](https://github.com/lytical/lyt-spa) contains projects for client api and your choice of either a nodejs or .net core server.
+
+## lyt-cli
+[read more...](https://github.com/lytical/lyt-spa/tree/master/cli#lyt-spa-cli)
+
+## lyt-node
+[read more...](https://github.com/lytical/lyt-spa/tree/master/node#lyt-spa-node)
+
+## lyt-core
+[read more...](https://github.com/lytical/lyt-spa/tree/master/core#lyt-spa-core)
