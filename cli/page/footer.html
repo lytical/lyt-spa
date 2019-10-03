@@ -1,0 +1,12 @@
+﻿<footer class="navbar navbar-expand-lg navbar-light fixed-bottom hidden-print">
+  <ul class="mr-auto navbar-nav">
+    <li class="nav-item">
+      <small class="navbar-text">&copy; {{ year }} my company. <span class="text-muted">all rights reserved.</span></small>
+    </li>
+  </ul>
+  <ul class="navbar-nav">
+    <li class="nav-item" v-if="$root.user">
+      <small class="navbar-text">Welcome {{ $root.user }}</small>
+    </li>
+  </ul>
+</footer>

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "composite": true,
+    "downlevelIteration": true,
+    "paths": {
+      "pubsub": [ "pubsub/signalr" ],
+      "navbar": [ "navbar/main" ]
+    },
+    "lib": [ "dom", "es6" ],
+    "module": "amd",
+    "outFile": "../bin/cli/main.js",
+    "sourceRoot": "/",
+    "target": "es5"
+  },
+  "exclude": [
+    "node_moudles"
+  ],
+  "extends": "../common.tsconfig.json"
+}

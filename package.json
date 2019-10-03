@@ -1,0 +1,62 @@
+{
+  "author": {
+    "name": "barry hayles",
+    "email": "barry.hayles@lytical.com",
+    "url": "https://www.lytical.com"
+  },
+  "dependencies": {
+    "@aspnet/signalr": "^3.0.0-preview6.19307.2",
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "bootstrap": "^4.3.1",
+    "chartist": "^0.11.3",
+    "cookie-parser": "^1.4.4",
+    "esprima": "^4.0.1",
+    "express": "^4.17.1",
+    "http-status-enum": "^1.0.2",
+    "jquery": "^3.4.1",
+    "mongodb": "3.3.2",
+    "popper.js": "^1.15.0",
+    "requirejs": "2.3.6",
+    "rxjs": "6.5.2",
+    "saslprep": "1.0.3",
+    "sockjs": "^0.3.19",
+    "sockjs-client": "^1.4.0",
+    "uuid": "^3.3.2",
+    "vue": "2.6.10",
+    "vue-router": "3.1.2"
+  },
+  "description": "lytical single page web application bolierplate.",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify-es": "^1.0.4",
+    "typescript": "3.6.2"
+  },
+  "keywords": [
+    "express",
+    "lytical",
+    "node",
+    "vue",
+    "lyt",
+    "core",
+    ".net",
+    "typescript",
+    "bootstrap"
+  ],
+  "license": "UNLICENSED",
+  "main": "bin/node/main.js",
+  "name": "@lytical/lyt-spa",
+  "repository": {
+    "type": "git",
+    "url": "https://lytical@dev.azure.com/lytical/hermes/_git/node-vue"
+  },
+  "scripts": {
+    "build": "tsc --build cli api",
+    "clean": "tsc --build --clean cli api",
+    "start": "node node/main",
+    "start-dev": "node node/main --dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.0"
+}

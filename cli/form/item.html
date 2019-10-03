@@ -1,0 +1,7 @@
+﻿<div class="form-group row" v-bind:class="{'fi-touched':is_touched,'fi-untouched':is_untouched,'fi-valid':is_valid,'fi-invalid':is_invalid,'fi-dirty':is_dirty,'fi-pristine':is_pristine}">
+  <label :for="id" class="col-sm-3 col-form-label text-right" :class="{'text-danger':is_touched&&is_invalid}" v-html="caption"></label>
+  <div class="col-sm-9">
+    <slot></slot>
+    <div class="text-danger" v-if="is_touched&&is_invalid" v-html="invalid_msg"></div>
+  </div>
+</div>

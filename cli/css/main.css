@@ -1,0 +1,14 @@
+﻿/* @preserve
+  (c) 2019 lytical, inc. all rights are reserved.
+  lytical(r) is a registered trademark of lytical, inc.
+  please refer to your license agreement on the use of this file.
+*/
+
+body, button, .popover {
+  text-transform: lowercase;
+}
+
+li.nav-item.fi-invalid.fi-touched-all > a.nav-link {
+  background-color: #dc3545 !important;
+  color: white !important;
+}

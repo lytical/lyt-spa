@@ -1,0 +1,8 @@
+{
+  "host-url": "http://localhost:1337",
+  "db": "fti",
+  "primary-repos": {
+    "conn-str": "mongodb://localhost:27017",
+    "type": "mongodb"
+  }
+}

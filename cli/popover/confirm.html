@@ -1,0 +1,7 @@
+﻿<div>
+  <slot></slot>
+  <div class="text-right mt-2">
+    <button class="btn btn-sm btn-secondary" type="button" @click="click(false)"><slot name="no">No</slot></button>
+    <button class="btn btn-sm btn-primary" type="button" :disabled="is_disabled" @click="click(true)"><slot name="yes">Yes</slot></button>
+  </div>
+</div>

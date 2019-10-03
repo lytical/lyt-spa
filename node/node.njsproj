@@ -1,0 +1,128 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>node1</Name>
+    <RootNamespace>node1</RootNamespace>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <ScriptArguments>--dev --cfg-path=../node/config.json</ScriptArguments>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>7492b479-d480-4fc8-8e1e-0a35bfd3414e</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>../bin/node/main.js</StartupFile>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>../bin</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>False</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="main.ts" />
+    <Content Include="config.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config" />
+    <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="data\" />
+    <Folder Include="data\mongodb\" />
+    <Folder Include="ioc\" />
+    <Folder Include="lib\" />
+    <Folder Include="mw\" />
+    <Folder Include="spa\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\settings.ts" />
+    <TypeScriptCompile Include="app\svc.ts" />
+    <TypeScriptCompile Include="data\db.ts" />
+    <TypeScriptCompile Include="data\exec.ts" />
+    <TypeScriptCompile Include="data\mongodb\index.ts" />
+    <TypeScriptCompile Include="data\repos.ts" />
+    <TypeScriptCompile Include="ioc\config.ts" />
+    <TypeScriptCompile Include="ioc\container.ts" />
+    <TypeScriptCompile Include="ioc\index.ts" />
+    <TypeScriptCompile Include="ioc\inject.ts" />
+    <TypeScriptCompile Include="lib\buffer.ts" />
+    <TypeScriptCompile Include="lib\cancellation.ts" />
+    <TypeScriptCompile Include="lib\cmd-line.ts" />
+    <TypeScriptCompile Include="lib\config.ts" />
+    <TypeScriptCompile Include="lib\crypto.ts" />
+    <TypeScriptCompile Include="lib\fs.ts" />
+    <TypeScriptCompile Include="lib\index.ts" />
+    <TypeScriptCompile Include="lib\json.ts" />
+    <TypeScriptCompile Include="lib\logger.ts" />
+    <TypeScriptCompile Include="lib\net.ts" />
+    <TypeScriptCompile Include="lib\plain-object.ts" />
+    <TypeScriptCompile Include="lib\state-machine.ts" />
+    <TypeScriptCompile Include="lib\text.ts" />
+    <TypeScriptCompile Include="mw\api.ts" />
+    <TypeScriptCompile Include="mw\app.ts" />
+    <TypeScriptCompile Include="mw\error.ts" />
+    <TypeScriptCompile Include="mw\index.ts" />
+    <TypeScriptCompile Include="mw\key-manager.ts" />
+    <TypeScriptCompile Include="mw\message.ts" />
+    <TypeScriptCompile Include="mw\odata.ts" />
+    <TypeScriptCompile Include="mw\request.ts" />
+    <TypeScriptCompile Include="mw\secured-by.ts" />
+    <TypeScriptCompile Include="mw\web-sock.ts" />
+    <TypeScriptCompile Include="mw\xsrf-token.ts" />
+    <TypeScriptCompile Include="spa\index.ts" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,9 @@
+﻿<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="ctrl-navbar-search"><i class="fas fa-search"></i></span>
+  </div>
+  <input type="search" class="form-control" :title="title||'Search'" :placeholder="placeholder||'search...'" aria-label="search" aria-describedby="ctrl-navbar-search-search" v-model="value" @input="input($event)">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" title="click to perform search." @click="search($event)"><i class="fas fa-arrow-up"></i></button>
+  </div>
+</div>

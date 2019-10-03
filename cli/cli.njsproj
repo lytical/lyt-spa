@@ -1,0 +1,139 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>node1</Name>
+    <RootNamespace>node1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>DF03C2D2-4AAF-4833-91C2-E8A32D443395</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.ts</StartupFile>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="main.ts" />
+    <Content Include="css\main.css" />
+    <Content Include="ctrl\card-header.html" />
+    <Content Include="ctrl\loading.html" />
+    <Content Include="default.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="form\check.html" />
+    <Content Include="form\item.html" />
+    <Content Include="index.html" />
+    <Content Include="navbar\main.html" />
+    <Content Include="navbar\search.html" />
+    <Content Include="package.json" />
+    <Content Include="page\footer.html" />
+    <Content Include="page\header.html" />
+    <Content Include="page\main.html" />
+    <Content Include="popover\can-delete.html" />
+    <Content Include="popover\component.html" />
+    <Content Include="popover\confirm.html" />
+    <Content Include="popover\event.html" />
+    <Content Include="README.md" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config" />
+    <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\svc.ts" />
+    <TypeScriptCompile Include="component.ts" />
+    <TypeScriptCompile Include="ctrl\card-header.ts" />
+    <TypeScriptCompile Include="ctrl\loading.ts" />
+    <TypeScriptCompile Include="default.ts" />
+    <TypeScriptCompile Include="directive.ts" />
+    <TypeScriptCompile Include="form\check.ts" />
+    <TypeScriptCompile Include="form\component.ts" />
+    <TypeScriptCompile Include="form\item.ts" />
+    <TypeScriptCompile Include="form\status.ts" />
+    <TypeScriptCompile Include="navbar\main.ts" />
+    <TypeScriptCompile Include="navbar\search.ts" />
+    <TypeScriptCompile Include="navbar\svc.ts" />
+    <TypeScriptCompile Include="page\footer.ts" />
+    <TypeScriptCompile Include="page\header.ts" />
+    <TypeScriptCompile Include="page\main.ts" />
+    <TypeScriptCompile Include="popover\can-delete.ts" />
+    <TypeScriptCompile Include="popover\component.ts" />
+    <TypeScriptCompile Include="popover\confirm.ts" />
+    <TypeScriptCompile Include="popover\event.ts" />
+    <TypeScriptCompile Include="popover\main.ts" />
+    <TypeScriptCompile Include="pubsub\signalr.ts" />
+    <TypeScriptCompile Include="pubsub\sockjs.ts" />
+    <TypeScriptCompile Include="pubsub\svc.ts" />
+    <TypeScriptCompile Include="util\crypto.ts" />
+    <TypeScriptCompile Include="util\deferred.ts" />
+    <TypeScriptCompile Include="util\http.ts" />
+    <TypeScriptCompile Include="util\object.ts" />
+    <TypeScriptCompile Include="util\text.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="css\" />
+    <Folder Include="ctrl\" />
+    <Folder Include="form\" />
+    <Folder Include="navbar\" />
+    <Folder Include="page\" />
+    <Folder Include="popover\" />
+    <Folder Include="pubsub\" />
+    <Folder Include="util\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,4 @@
+﻿<div :class="{'text-info':info,'text-success':success,'text-danger':error}">
+  <i class="fas mr-2" :class="{'fa-check':success,'fa-exclamation-triangle':error,'fa-info':info}"></i>
+  <span v-html="info||success||error"></span>
+</div>

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": [ "es6" ],
+    "module": "commonjs",
+    "outDir": "../bin/node",
+    "target": "es6"
+  },
+  "extends": "../common.tsconfig.json"
+}

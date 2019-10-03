@@ -1,0 +1,36 @@
+{
+  "author": {
+    "name": "barry hayles; lytical, inc.",
+    "email": "barry.hayles@lytical.com",
+    "url": "https://www.lytical.com"
+  },
+  "description": "lyt-spa-node",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.1",
+    "@types/mongodb": "3.3.1",
+    "@types/node": "^12.0.4",
+    "@types/sockjs": "^0.3.31",
+    "@types/uuid": "^3.4.4",
+    "typescript": "3.6.3"
+  },
+  "main": "main.js",
+  "name": "@lytical/lyt-spa-node",
+  "peerDependencies": {
+    "cookie-parser": "^1.4.4",
+    "esprima": "^4.0.1",
+    "express": "^4.17.1",
+    "http-status-enum": "^1.0.2",
+    "mongodb": "3.3.2",
+    "rxjs": "6.5.2",
+    "saslprep": "1.0.3",
+    "sockjs": "^0.3.19",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.0"
+}
