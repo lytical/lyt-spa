@@ -1,4 +1,6 @@
 {
+  "host-pfx": null,
+  "host-pfx-pwd": null,
   "host-url": "http://localhost:1337",
   "db": "lyt",
   "primary-repos": {
