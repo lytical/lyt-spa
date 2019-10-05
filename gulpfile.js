@@ -122,7 +122,7 @@ function bundle_html() {
             rej(err);
           }
           else {
-            _cp.exec('node.exe node_modules/requirejs/bin/r.js -o name=html paths.text=node_modules/requirejs-text/text out=' +
+            _cp.exec('node node_modules/requirejs/bin/r.js -o name=html paths.text=node_modules/requirejs-text/text out=' +
               target_dir +
               '/cli/html.js baseUrl=cli',
               (err, stdout, stdin) => {
@@ -148,4 +148,4 @@ exports.bundle_html = bundle_html;
 exports.clean = clean;
 exports.minify = minify;
 exports.predeploy = predeploy;
-exports.deploy = gulp.series(predeploy, copy, minify);
+exports.deploy = gulp.series(predeploy, exports.copy, minify);

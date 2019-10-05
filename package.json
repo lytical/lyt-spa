@@ -42,7 +42,11 @@
     "core",
     ".net",
     "typescript",
-    "bootstrap"
+    "bootstrap",
+    "jquery",
+    "websockets",
+    "signalr",
+    "spa"
   ],
   "license": "UNLICENSED",
   "main": "bin/node/main.js",
@@ -52,10 +56,11 @@
     "url": "https://github.com/lytical/lyt-spa.git"
   },
   "scripts": {
-    "build": "tsc --build cli api",
-    "clean": "tsc --build --clean cli api",
+    "build": "tsc --build cli node",
+    "clean": "tsc --build --clean cli node",
     "start": "node node/main",
     "start-dev": "node node/main --dev",
+    "start-core": "dotnet netcoreapp3.0/lyt-spa-core.dll",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "version": "0.0.0"

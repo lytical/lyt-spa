@@ -3,6 +3,19 @@
     "tasks": [
         {
             "label": "build",
+            "dependsOn": [
+                "build-core",
+                "build-ts",
+                "copy"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build-core",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -11,7 +24,8 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
+            "group": "build"
         },
         {
             "label": "publish",
@@ -37,6 +51,30 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-ts",
+            "type": "npm",
+            "script": "build",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "copy",
+            "type": "gulp",
+            "task": "copy",
+            "problemMatcher": [
+                "$gulp-tsc"
+            ]
+        },
+        {
+            "type": "gulp",
+            "task": "clean",
+            "problemMatcher": [
+                "$gulp-tsc"
+            ]
         }
     ]
 }

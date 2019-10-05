@@ -2,7 +2,7 @@
 ##### the single page application, designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
 ## prologue
 first thing you may notice, "why is everything lowercase?". well it's been my style for a few years now. it's part of my brand. i apologize for any difficulties reading this.
-so in that… man, where do i start... i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desire.
+so in thatï¿½ man, where do i start... i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desire.
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
 before es6, i started to appreciate javascript modules. i then tried [angularjs](https://angularjs.org/); [angular](https://angular.io/); [vuejs](https://vuejs.org/); [reactjs](https://reactjs.org/); ...
 
@@ -28,7 +28,6 @@ the first step is to fork the repository at <https://github.com/lytical/lyt-spa.
 ### prerequisites
 i designed and built the framework with:
 - nodejs version 11.7.0
-- typescript version 3.5.2
 - .net core version 3.0
 - visual studio 2019 version 16.3.1 (for the solution and projects)
 
