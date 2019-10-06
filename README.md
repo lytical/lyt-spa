@@ -1,7 +1,7 @@
 # lyt-spa
 the single page application, designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
 ## prologue
-i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desire.
+i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desires.
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
 before es6, i started to appreciate javascript modules. i then tried [angularjs](https://angularjs.org/); [angular](https://angular.io/); [vuejs](https://vuejs.org/); [reactjs](https://reactjs.org/); ...
 
@@ -46,9 +46,9 @@ the following outlines relevant directories and files for getting started.
 ```
 root
 +- cli
-   +- index.html
-   +- default.html
-   +- default.ts
+|  +- index.html
+|  +- default.html
+|  +- default.ts
 +- node
 +- core
 ```
