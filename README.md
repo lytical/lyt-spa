@@ -33,20 +33,66 @@ i designed and built the framework with (latest versions should work):
 - visual studo code version 1.38.1
 
 ## getting started
-1) fork the repository at <https://github.com/lytical/lyt-spa.git>
+1) fork the repository at <https://github.com/lytical/lyt-spa.git>.
 2) clone your repository.
-3) in the root folder, execute `npm install` to install packages. you can ignore the 'peer dependencies' messages.
+3) in the root folder, execute `npm install` to install packages. you may ignore the 'peer dependencies' warning messages.
 4) build the projects in your ide of choice, or in the root folder execute `npm run-script build`.
-5) launch your host of choice: in the root folder, either execute `npm run-script start-node` [^1] or `npm run-script start-core`.
+5) launch your host of choice: in the root folder, either execute `npm run-script start-node`[^1] or `npm run-script start-core`.
 6) lauch your browser and navigate to the host site http://localhost:5000/.
 
-[^1]: running the *nodejs* host requires default websocket code to be modified first. [read more...](/cli#configure-for-sockjs-node-server)
+[^1]: the client is code by default for signalr websockets. running the *nodejs* host, requires client code changes. [read more...](/cli#configure-for-sockjs-node-server)
 
-## lyt-cli
-[read more...](/cli#lyt-spa-cli)
+the following outlines relevant directories and files for getting started.
 
-## lyt-node
-[read more...](/node#lyt-spa-node)
+```
+root
++- cli
+   +- index.html
+   +- default.html
+   +- default.ts
++- node
++- core
+```
+### html template
+the html template file `/cli/index.html` is the deafult document and contains the startup html for the application. the template defines a header; footer; and a main.
+the main hosts a vue router.
+### default page
+the default landing page is rendered from the default component. a component consists of a `.ts` and a `.html` file. `/cli/deafult.ts` and `/cli/default.html` defines the default component.
+### components
+components are exported classes, decorated with `@is_component()`. the argument to this decorator specifies the html file used to render the compnoent.
+```javascript
+import { is_component } from 'component';
 
-## lyt-core
-[read more...](/core#lyt-spa-core)
+@is_component({
+  html: 'my-component.html'
+})
+export class my_component {
+}
+```
+when compiled, will generate and register a [vue component](https://vuejs.org/v2/guide/index.html#Composing-with-Components). you can read more about components [here...](/cli#components).
+### host request handlers
+request handlers can be implemented in core as controller actions or nodejs as decorated class methods.
+#### .net core handlers
+core handlers are implemented in controller classes.
+```csharp
+public class item_controller : ControllerBase
+{
+  [HttpGet("/item/sizes")]
+  public string[] get_sizes() => new ["small", "medium", "large"];
+}
+```
+you can read more about .net core controllers [here...](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller?view=aspnetcore-3.0&tabs=visual-studio).
+you can begin adding controller classes in the core project. i generally create a sub folder in the core project; add a service class; add my controller class; call my service class methods from my controller action methods.
+#### nodejs handlers
+request handlers implemented in the node project, are expored class member methods, decorated with `@api_request_handler()`. the argument to this decorator specifies the http method and optionally a request path.
+```javascript
+import { next_fn, request, response, api_request_handler } from '../mw';
+
+export class item_handlers {
+  @api_request_handler({ method: 'GET' })
+  get_sizes(rqs: request, rsp: response, next: next_fn) {
+    rsp.send(['small', 'medium', 'large']).end();
+  }
+}
+```
+when compiled, will generate and register an [express middleware](https://expressjs.com/en/4x/api.html#middleware-callback-function-examples) function. you can read more about handlers [here...](/node#request-handlers).
