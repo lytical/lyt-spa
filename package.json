@@ -56,11 +56,11 @@
     "url": "https://github.com/lytical/lyt-spa.git"
   },
   "scripts": {
-    "build": "tsc --build cli node",
-    "clean": "tsc --build --clean cli node",
-    "start": "node node/main",
-    "start-dev": "node node/main --dev",
-    "start-core": "dotnet netcoreapp3.0/lyt-spa-core.dll",
+    "build": "tsc --build cli node && dotnet build core/core.csproj && gulp copy",
+    "clean": "tsc --build --clean cli node && dotnet clean core/core.csproj",
+    "postinstall": "cd cli && npm install && cd ../node && npm install && cd ..",
+    "start-core": "dotnet run --project core/core.csproj",
+    "start-node": "cd bin && node node/main --dev && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "version": "0.0.0"

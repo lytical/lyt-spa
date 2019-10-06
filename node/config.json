@@ -1,7 +1,7 @@
 {
   "host-pfx": null,
   "host-pfx-pwd": null,
-  "host-url": "http://localhost:1337",
+  "host-url": "http://localhost:5000",
   "db": "lyt",
   "primary-repos": {
     "conn-str": "mongodb://localhost:27017",
