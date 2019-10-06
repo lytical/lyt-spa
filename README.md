@@ -61,16 +61,23 @@ the default landing page is rendered from the default component. a component con
 ### components
 components are exported classes, decorated with `@is_component()`. the argument to this decorator specifies the html file used to render the compnoent.
 ```javascript
-/// my-component.ts
+// cli/item/lsit.ts
 import { is_component } from 'component';
 
 @is_component({
-  html: 'my-component.html'
+  html: 'item/list.html'
 })
-export class my_component {
+export class item_list_component {
 }
 ```
-when compiled, will generate and register a [vue component](https://vuejs.org/v2/guide/index.html#Composing-with-Components). you can read more about components [here...](/cli#components).
+when compiled, will generate and register a [vue component](https://vuejs.org/v2/guide/index.html#Composing-with-Components). the component's name will be determined by it's path.
+for example if my component's path is `/item/list`, then it's name will be `item-list` and can be used in html templates as:
+```html
+<div>
+  <item-list></item-list>
+</div>
+```
+you can read more about components [here...](/cli#components).
 ### host request handlers
 request handlers can be implemented in core as controller actions or nodejs as decorated class methods.
 #### .net core handlers
@@ -88,7 +95,7 @@ you can begin adding controller classes in the core project. i generally create 
 #### nodejs handlers
 request handlers implemented in the node project, are expored class member methods, decorated with `@is_request_handler()`. the argument to this decorator specifies the http method and optionally a request path.
 ```javascript
-// item-handler.ts
+// node/item/sizes.ts
 import { next_fn, request, response, is_request_handler } from '../mw';
 
 export class item_handlers {
@@ -98,4 +105,6 @@ export class item_handlers {
   }
 }
 ```
-when compiled, will generate and register an [express middleware](https://expressjs.com/en/4x/api.html#middleware-callback-function-examples) function. you can read more about handlers [here...](/node#request-handlers).
+when compiled, will generate and register an [express middleware](https://expressjs.com/en/4x/api.html#middleware-callback-function-examples) function.
+if a `path` is not specified in the handler's decorator, then the default path will be relative to the module's path under the node sub-folder.
+so for the request handler above, it's path will be `/item/sizes`. you can read more about handlers [here...](/node#request-handlers).
