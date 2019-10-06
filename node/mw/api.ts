@@ -11,20 +11,20 @@ import { fs } from '../lib';
 import { get_method_args, container } from '../ioc';
 import HTTP_STATUS_CODES from 'http-status-enum';
 
-const api_request_handler_method: unique symbol = Symbol('api-request-handler-method');
+const request_handler_method: unique symbol = Symbol('lyt-request-handler-method');
 
-export interface api_request_handler_args {
+export interface request_handler_args {
   path?: (string | RegExp) | (string | RegExp)[];
   method?: string | string[];
 }
 
-export function api_request_handler(arg?: api_request_handler_args) {
+export function is_request_handler(arg?: request_handler_args) {
   return (cstr: any, method_nm: string, prop: PropertyDescriptor) => {
     console.assert(prop.value.length >= 3, 'method is not a request handler');
     if(prop.value.length >= 3) {
-      const metadata = cstr[api_request_handler_method] || {};
+      const metadata = cstr[request_handler_method] || {};
       metadata[method_nm] = arg || {};
-      cstr[api_request_handler_method] = metadata;
+      cstr[request_handler_method] = metadata;
     }
   }
 }
@@ -59,12 +59,12 @@ export async function api_use(app: application, path: string, root?: string, set
           let cls = mod[cstor];
           let item = cls.prototype;
           while(item) {
-            let pd = Object.getOwnPropertyDescriptor(item, api_request_handler_method);
+            let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
             if(pd && !set.has(item)) {
               set.add(item);
-              let md: { [_: string]: api_request_handler_args } = pd.value;
+              let md: { [_: string]: request_handler_args } = pd.value;
               for(let method_nm of Object.getOwnPropertyNames(md)) {
-                let arg: api_request_handler_args = md[method_nm];
+                let arg: request_handler_args = md[method_nm];
                 if(arg.path === undefined) {
                   arg.path = [pm[i][0]!];
                 }

@@ -12,7 +12,7 @@ import * as _uuid from 'uuid';
 import { container, inject } from '../ioc';
 import { message } from './message';
 import { mw_app } from './app';
-import { api_request_handler } from './api';
+import { is_request_handler } from './api';
 import { request, response, next_fn } from './request';
 import HTTP_STATUS_CODES from 'http-status-enum';
 
@@ -90,7 +90,7 @@ export class web_sock {
 }
 
 export class web_sock_cli {
-  @api_request_handler({
+  @is_request_handler({
     method: 'POST',
     path: '/pubsub/send-to/:topic/:id'
   })
@@ -99,7 +99,7 @@ export class web_sock_cli {
     rsp.status(HTTP_STATUS_CODES.NO_CONTENT).end();
   }
 
-  @api_request_handler({
+  @is_request_handler({
     method: 'POST',
     path: '/pubsub/send/:topic'
   })

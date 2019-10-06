@@ -84,12 +84,12 @@ public class item_controller : ControllerBase
 you can read more about .net core controllers [here...](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller?view=aspnetcore-3.0&tabs=visual-studio).
 you can begin adding controller classes in the core project. i generally create a sub folder in the core project; add a service class; add my controller class; call my service class methods from my controller action methods.
 #### nodejs handlers
-request handlers implemented in the node project, are expored class member methods, decorated with `@api_request_handler()`. the argument to this decorator specifies the http method and optionally a request path.
+request handlers implemented in the node project, are expored class member methods, decorated with `@is_request_handler()`. the argument to this decorator specifies the http method and optionally a request path.
 ```javascript
-import { next_fn, request, response, api_request_handler } from '../mw';
+import { next_fn, request, response, is_request_handler } from '../mw';
 
 export class item_handlers {
-  @api_request_handler({ method: 'GET' })
+  @is_request_handler({ method: 'GET' })
   get_sizes(rqs: request, rsp: response, next: next_fn) {
     rsp.send(['small', 'medium', 'large']).end();
   }
