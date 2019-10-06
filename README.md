@@ -55,7 +55,7 @@ root
 ```
 ### html template
 the html template file `/cli/index.html` is the deafult document and contains the startup html for the application. the template defines a header; footer; and a main.
-the main hosts a vue router.
+the main hosts a [vue router](https://router.vuejs.org/).
 ### default page
 the default landing page is rendered from the default component. a component consists of a `.ts` and a `.html` file. `/cli/deafult.ts` and `/cli/default.html` defines the default component.
 ### components
