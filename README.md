@@ -1,5 +1,5 @@
 # lyt-spa
-##### the single page application, designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
+the single page application, designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
 ## prologue
 i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desire.
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
@@ -40,7 +40,7 @@ i designed and built the framework with (latest versions should work):
 5) launch your host of choice: in the root folder, either execute `npm run-script start-node`[^1] or `npm run-script start-core`.
 6) lauch your browser and navigate to the host site http://localhost:5000/.
 
-[^1]: the client is code by default for signalr websockets. running the *nodejs* host, requires client code changes. [read more...](/cli#configure-for-sockjs-node-server)
+[^1]: the client is coded by default for signalr websockets. running the *nodejs* host, requires client code changes. [read more...](/cli#configure-for-sockjs-node-server)
 
 the following outlines relevant directories and files for getting started.
 
