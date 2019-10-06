@@ -12,14 +12,14 @@ can i make vue work for me? it has some quirks i personally didn't like, but i h
 ##### what are my desires?
 - i wanted to develop in **typescript**.
 - preferred to use browser amd loader like **[requirejs](https://requirejs.org/)**.
-- i felt **ioc, dependency injection** can be controlled by the browser's module loader, but i wanted an ioc container in my server code.
+- i felt **ioc, dependency injection** can be controlled by the browser's module loader, but i wanted an ioc container in my host code.
 - i didn't want to maintain code to **register the application components**. components should be able to "register themselves".
 - i also didn't want to maintain code to **use(...)** all my **express middleware** request handlers. the handlers should be able to "'use' themselves".
-- i wanted my **express request handlers** declared/defined similar to how **like .net core controller actions**.
+- i wanted my **express request handlers** declared/defined similar to **.net core controller actions**.
 - component logic and **html templates** needed to be separated, but associated similar to angular components.
 - intricacies i found in vue needed to be approached differently with typescript constructs.
 - my express application needed to handle **clustering and child process communications**.
-- i wanted server-to-client messaging built in.
+- i wanted host-to-client messaging built in.
 ## introduction
 lyt-spa is a comprehensive solution to single page web applications. the [repository](https://github.com/lytical/lyt-spa) contains projects for the client api and your choice of either a nodejs or a .net core host.
 the client and node frameworks are written in typescript. the core framework is written in .net core 3.0.
