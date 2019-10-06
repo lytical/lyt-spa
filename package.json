@@ -57,6 +57,8 @@
   },
   "scripts": {
     "build": "tsc --build cli node && dotnet build core/core.csproj && gulp copy",
+    "build-core": "dotnet build core/core.csproj",
+    "build-ts": "tsc --build cli node",
     "clean": "tsc --build --clean cli node && dotnet clean core/core.csproj",
     "postinstall": "cd cli && npm install && cd ../node && npm install && cd ..",
     "start-core": "dotnet run --project core/core.csproj",
