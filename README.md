@@ -34,11 +34,10 @@ i designed and built the framework with (latest versions should work):
 
 ## getting started
 1) fork the repository at <https://github.com/lytical/lyt-spa.git>.
-2) clone your repository.
-3) in the root folder, execute `npm install` to install packages. you may ignore the 'peer dependencies' warning messages.
-4) build the projects in your ide of choice, or in the root folder execute `npm run-script build`.
-5) launch your host of choice: in the root folder, either execute `npm run-script start-node`[^1] or `npm run-script start-core`.
-6) lauch your browser and navigate to the host site http://localhost:5000/.
+2) clone your repository and open a terminal/command window to the root folder.
+3) execute `npm install` to install and build the projects.
+4) execute `npm start` to launch the .net core host. the *core* host is the default host after installation, but can be changed with some minor modiciations.
+5) lauch your browser and navigate to the host site http://localhost:5000/.
 
 [^1]: the client is coded by default for signalr websockets. running the *nodejs* host, requires client code changes. [read more...](/cli#configure-for-sockjs-node-server)
 
@@ -106,5 +105,5 @@ export class item_handlers {
 }
 ```
 when compiled, will generate and register an [express middleware](https://expressjs.com/en/4x/api.html#middleware-callback-function-examples) function.
-if a `path` is not specified in the handler's decorator, then the default path will be relative to the module's path under the node sub-folder.
-so for the request handler above, it's path will be `/item/sizes`. you can read more about handlers [here...](/node#request-handlers).
+if a `path` is not specified in the handler's decorator, then the default path will be relative to the module's path from the `/node` sub-folder.
+so for the request handler above, it's path will default to `/item/sizes`. you can read more about handlers [here...](/node#request-handlers).

@@ -7,6 +7,8 @@
   "dependencies": {
     "@aspnet/signalr": "^3.0.0-preview6.19307.2",
     "@fortawesome/fontawesome-free": "^5.10.1",
+    "@lytical/lyt-spa-cli": "file:cli",
+    "@lytical/lyt-spa-node": "file:node",
     "bootstrap": "^4.3.1",
     "chartist": "^0.11.3",
     "cookie-parser": "^1.4.4",
@@ -60,7 +62,8 @@
     "build-core": "dotnet build core/core.csproj",
     "build-ts": "tsc --build cli node",
     "clean": "tsc --build --clean cli node && dotnet clean core/core.csproj",
-    "postinstall": "cd cli && npm install && cd ../node && npm install && cd ..",
+    "postinstall": "npm install cli && npm install node && npm run build",
+    "start": "npm run-script start-core",
     "start-core": "dotnet run --project core/core.csproj",
     "start-node": "cd bin && node node/main --dev && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
