@@ -61,6 +61,7 @@ the default landing page is rendered from the default component. a component con
 ### components
 components are exported classes, decorated with `@is_component()`. the argument to this decorator specifies the html file used to render the compnoent.
 ```javascript
+/// my-component.ts
 import { is_component } from 'component';
 
 @is_component({
@@ -75,6 +76,7 @@ request handlers can be implemented in core as controller actions or nodejs as d
 #### .net core handlers
 core handlers are implemented in controller classes.
 ```csharp
+// item-controller.cs
 public class item_controller : ControllerBase
 {
   [HttpGet("/item/sizes")]
@@ -86,6 +88,7 @@ you can begin adding controller classes in the core project. i generally create 
 #### nodejs handlers
 request handlers implemented in the node project, are expored class member methods, decorated with `@is_request_handler()`. the argument to this decorator specifies the http method and optionally a request path.
 ```javascript
+// item-handler.ts
 import { next_fn, request, response, is_request_handler } from '../mw';
 
 export class item_handlers {
