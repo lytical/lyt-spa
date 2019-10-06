@@ -14,6 +14,12 @@
     "@types/uuid": "^3.4.4",
     "typescript": "3.6.3"
   },
+  "keywords": [
+    "vue",
+    "node",
+    "lytical"
+  ],
+  "license": "UNLICENSED",
   "main": "main.js",
   "name": "@lytical/lyt-spa-node",
   "peerDependencies": {

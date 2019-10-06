@@ -14,7 +14,7 @@ import { container, add_command_line_to_config, add_json_file_to_config } from '
 export default class spa_init {
   static init(app: mw_app, use_static: boolean = false, api_path: string = 'node', cli_path: string = 'cli') {
     app.once('show-help', () => console.info(`
-node-vue TM by lytical (R)
+lyt-spa(TM) by lytical(R)
   usage:
     node api/main --syskey [--cfg-path=...] [--dev]
   where:
