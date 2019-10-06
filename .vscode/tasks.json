@@ -55,7 +55,7 @@
         {
             "label": "build-ts",
             "type": "npm",
-            "script": "build",
+            "script": "build-ts",
             "problemMatcher": [
                 "$tsc"
             ],
