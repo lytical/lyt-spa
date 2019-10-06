@@ -40,13 +40,13 @@ i designed and built the framework with (latest versions should work):
 5) launch your host of choice: in the root folder, either execute `npm run-script start-node` [^1] or `npm run-script start-core`.
 6) lauch your browser and navigate to the host site http://localhost:5000/.
 
-[^1]: running the *nodejs* host requires default websocket code to be modified first. [read more...](/ltical/lyt-spa/cli#configure-for-sockjs-node-server)
+[^1]: running the *nodejs* host requires default websocket code to be modified first. [read more...](/cli#configure-for-sockjs-node-server)
 
 ## lyt-cli
-[read more...](/lytical/lyt-spa/tree/master/cli#lyt-spa-cli)
+[read more...](/cli#lyt-spa-cli)
 
 ## lyt-node
-[read more...](/lytical/lyt-spa/tree/master/node#lyt-spa-node)
+[read more...](/node#lyt-spa-node)
 
 ## lyt-core
-[read more...](/lytical/lyt-spa/tree/master/core#lyt-spa-core)
+[read more...](/core#lyt-spa-core)
