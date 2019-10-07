@@ -35,8 +35,9 @@ app_svc.settings.subscribe(
     try {
       Object.assign(settings, rs);
       for(let id of rs.directive) {
-        const dir_id = id.replace(/\//g, '-');
-        (<any>Vue).directive(dir_id, await directive.create(id));
+        let dir = await directive.create(id);
+        let md = directive.get_metadata(dir);
+        (<any>Vue).directive(md && md.name ? md.name : id.replace(/\//g, '-'), dir);
       }
       const routes: { path: string, component: any }[] = [];
       for(let id of rs.component) {
@@ -80,15 +81,15 @@ app_svc.settings.subscribe(
             }
           }
         });
-        (<any>Vue).component(cmp_id, cmp);
-        let rte = component.get_metadata(cmp);
-        if(rte) {
-          if(rte.route) {
-            for(let path of rte.route) {
+        let md = component.get_metadata(cmp);
+        (<any>Vue).component(md && md.name ? md.name : cmp_id, cmp);
+        if(md) {
+          if(md.route) {
+            for(let path of md.route) {
               routes.push({ component: cmp, path });
             }
           }
-          if(rte.keep_alive) {
+          if(md.keep_alive) {
             app_svc.keep_alive.push(cmp_id);
           }
         }

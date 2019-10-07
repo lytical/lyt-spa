@@ -14,6 +14,7 @@ export interface directive_binding extends DirectiveBinding {
 }
 
 export interface directive_metadata {
+  name?: string;
 }
 
 export interface directive {

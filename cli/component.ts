@@ -10,6 +10,7 @@ const component_metadata: unique symbol = Symbol('component-metadata');
 
 export interface component_metadata {
   html: string;
+  name?: string;
   route?: string[];
   keep_alive?: true;
 }
