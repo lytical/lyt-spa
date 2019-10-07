@@ -1,5 +1,6 @@
 # lyt-spa
-the single page application, designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
+the single page application framework, designed for productivity and rapid development.
+designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
 ## prologue
 i've been searching (for years) for a solution to a single page application framework (both client and host) that works to my desires.
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
@@ -60,7 +61,7 @@ the default landing page is rendered from the default component. a component con
 ### components
 components are exported classes, decorated with `@is_component()`. the argument to this decorator specifies the html file used to render the compnoent.
 ```javascript
-// cli/item/lsit.ts
+// cli/item/list.ts
 import { is_component } from 'component';
 
 @is_component({

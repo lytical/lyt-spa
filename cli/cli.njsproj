@@ -83,7 +83,6 @@
     <TypeScriptCompile Include="util\crypto.ts" />
     <TypeScriptCompile Include="util\deferred.ts" />
     <TypeScriptCompile Include="util\http.ts" />
-    <TypeScriptCompile Include="util\object.ts" />
     <TypeScriptCompile Include="util\text.ts" />
   </ItemGroup>
   <ItemGroup>
