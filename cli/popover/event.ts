@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component } from '../component';
+import { is_component, data } from '../component';
 import { popover_component, popover_msg_arg, popover_msg_observable } from './component';
 import { PopoverOption } from 'bootstrap';
 
@@ -21,14 +21,6 @@ export type popover_event_observable = popover_msg_observable<popover_msg_arg>;
   html: 'popover/event.html'
 })
 export class popover_event extends popover_component<popover_event_msg> implements popover_event_msg {
-  data() {
-    return <popover_event_msg>{
-      error: undefined,
-      info: undefined,
-      success: undefined
-    };
-  }
-
   protected on_hide() {
     this.error = this.info = this.success = undefined;
     super.on_hide();
@@ -42,7 +34,7 @@ export class popover_event extends popover_component<popover_event_msg> implemen
     });
   }
 
-  error?: string;
-  success?: string;
-  info?: string;
+  @data() error?: string;
+  @data() success?: string;
+  @data() info?: string;
 }

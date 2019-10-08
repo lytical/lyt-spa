@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   html: 'navbar/main.html'
 })
 export default class navbar_main implements component {
-  data() {
+  created() {
     this.svc = new navbar_service(this.id!);
     this.sub = [];
     this.sub.push(this.svc.navbar_add_item_topic.subscribe(msg => {
@@ -44,20 +44,17 @@ export default class navbar_main implements component {
         });
       }
     }));
-    return {};
   }
 
   destroyed() {
-    if(this.sub) {
-      for(let sub of this.sub) {
-        sub.unsubscribe();
-      }
-      this.sub = [];
+    for(let sub of this.sub) {
+      sub.unsubscribe();
     }
+    this.sub = [];
   }
 
-  private svc?: navbar_service;
-  private $el?: Element;
-  private sub?: Subscription[];
+  private svc!: navbar_service;
+  private $el!: Element;
+  private sub!: Subscription[];
   @property(String) private id?: string;
 }

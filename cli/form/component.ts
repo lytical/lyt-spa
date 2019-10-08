@@ -5,7 +5,7 @@
 */
 
 import { Subject, Subscription, SubscriptionLike } from 'rxjs';
-import { component, property } from 'component';
+import { component, property, data } from 'component';
 import { navbar_service } from '../navbar/svc';
 import { popover_event_arg, popover_event_msg } from '../popover/event';
 import { popover_confirm_arg, popover_confirm_msg } from '../popover/confirm';
@@ -20,7 +20,7 @@ export interface form_model {
   [_: string]: any;
 }
 
-export class form_component implements component {
+export class form_component implements component, form_model {
   beforeRouteEnter(to: Route, from: Route, next: (to?: (vm: Vue) => any) => void) {
     next(vm => {
       (<form_component>vm).navs.forEach(x => x[0].add(x[1]));
@@ -62,13 +62,6 @@ export class form_component implements component {
     this.unsubscribe.push(this.reg_form.subscribe(form => this.forms.push(form)));
   }
 
-  data(): any {
-    return <form_model>{
-      is_new: this.$route.params._id === '$new',
-      xhr: undefined
-    };
-  }
-
   destroyed() {
     for(let item of this.unsubscribe) {
       try {
@@ -86,6 +79,10 @@ export class form_component implements component {
   protected do_submit(evt: MouseEvent): void { }
 
   protected load_data(route: Route) { }
+
+  protected init_data(data: form_model) {
+    data.is_new = this.$route.params._id === '$new';
+  }
 
   mounted() {
     if(this.$refs) {
@@ -176,7 +173,8 @@ export class form_component implements component {
   protected confirm!: Subject<popover_confirm_arg>;
   protected event!: Subject<popover_event_arg>;
   protected unsubscribe!: SubscriptionLike[];
-  xhr?: Subscription;
+  @data() is_new!: boolean;
+  @data() xhr?: Subscription;
 
   // the following are to support Vue components
   readonly $el!: Element;

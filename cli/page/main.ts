@@ -4,16 +4,12 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component, component } from '../component';
+import { is_component, component, data } from '../component';
 import app_svc from '../app/svc';
 
 @is_component({
   html: 'page/main.html'
 })
 export class page_main implements component {
-  data() {
-    return {
-      keep_alive: app_svc.keep_alive
-    };
-  }
+  @data(app_svc.keep_alive) protected keep_alive?: string[];
 }

@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component } from "../component";
+import { is_component, data } from "../component";
 import { popover_confirm, popover_confirm_msg } from "./confirm";
 import { PopoverOption } from "bootstrap";
 
@@ -21,13 +21,6 @@ export class popover_can_delete extends popover_confirm {
     super.click(value);
   }
 
-  data() {
-    return {
-      item: 'item',
-      confirm: ''
-    }
-  }
-
   protected on_show(msg: popover_can_delete_msg, opt?: PopoverOption): PopoverOption {
     this.item = msg.item;
     return super.on_show(msg, opt);
@@ -37,6 +30,6 @@ export class popover_can_delete extends popover_confirm {
     return this.confirm !== this.item;
   }
 
-  private confirm?: string;
-  private item?: string;
+  @data() private confirm?: string;
+  @data('item') private item?: string;
 }

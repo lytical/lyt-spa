@@ -110,26 +110,11 @@ using these components in your html markup is as simple as:
 if you must implement multiple components in a file, only one component can, not have a decorated `name`.
 i prefer to implement components in their own files and have thier names infered by the application.
 this allows me to easily identify a component's implementation file, by its name.
-#### vue data
-a component can implement a `data()` method, to identify what properties, vue change tracking occurs. [read more...](https://vuejs.org/v2/guide/instance.html#Data-and-Methods)
-```javascript
-import { is_component } from 'component';
-
-@is_component({
-  html: 'my-template.html'
-})
-export class my_component implements component {
-  data() {
-    return {
-      id: 123,
-      name: 'lytical'
-    }
-  }
-}
-```
 #### @data()
-it's strongly recommended that you utilize the `@data()` decorator, instead of implementing the `data()` method.
-decorate the data member(s) of your class and optionally specify the initial value.
+you can indicate what data members (class properties) will participate in vue's change tracking (reactivity). [read more...](https://vuejs.org/v2/guide/instance.html#Data-and-Methods)
+vue requires component's `data()` method to return an object containing these members.
+utilize the `@data()` decorator to indicate what properties are to be tracked.
+decorate the data member(s) of your class and optionally specify an initial *primative* value.
 
 **usage**: `@data([value]) <member>: <data type>;`
 
@@ -143,6 +128,26 @@ import { data, is_component } from 'component';
 export class my_component implements component {
   @data(123) id!: number;
   @data('lytical') name!: string;
+}
+```
+although you can implement a `data()` method in your component, **do not** have both a `data()` method and `@data()` decorated data members, in the component.
+
+you may further initialize the instance data if you implement an `init_data()` method in your component.
+```javascript
+import { data, is_component } from 'component';
+
+@is_component({
+  html: 'my-template.html'
+})
+export class my_component implements component {
+  init_data(data: any) {
+    // 'this' references the component instance.
+    data.id = 123;
+    data.name = 'lytical';
+  }
+
+  @data() id!: number;
+  @data() name!: string;
 }
 ```
 

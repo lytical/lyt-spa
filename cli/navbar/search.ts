@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component, property } from "../component";
+import { is_component, property, data } from "../component";
 import { Observer } from "rxjs";
 
 export type navbar_search_event = [Event, string | undefined];
@@ -13,10 +13,6 @@ export type navbar_search_event = [Event, string | undefined];
   html: 'navbar/search.html'
 })
 export class navbar_search {
-  data() {
-    return { value: undefined, delay: undefined };
-  }
-
   input(evt: Event) {
     if(this.delay !== undefined) {
       clearTimeout(this.delay);
@@ -33,6 +29,6 @@ export class navbar_search {
   @property() protected event?: Observer<navbar_search_event>;
   @property(String) protected placeholder?: string;
   @property(String) protected title?: string;
-  value?: string;
-  delay?: number;
+  @data() value?: string;
+  @data() delay?: number;
 }

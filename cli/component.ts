@@ -7,6 +7,7 @@
 import Vue, { ComponentOptions } from 'vue';
 
 const component_metadata: unique symbol = Symbol('component-metadata');
+const component_data_metadata: unique symbol = Symbol('component-data-metadata');
 
 export interface component_metadata {
   html: string;
@@ -79,6 +80,35 @@ export function is_component(md: component_metadata) {
     }
   };
 };
+
+function get_data_for(target: any): object {
+  if(!target) {
+    return {};
+  }
+  let md = Object.getOwnPropertyDescriptor(target, 'data');
+  return md && typeof md.value === 'function' ? md.value() : get_data_for(Object.getPrototypeOf(target));
+}
+
+export function data(value?: any) {
+  return (target: any, property: string, descriptor?: PropertyDescriptor) => {
+    let md = Object.getOwnPropertyDescriptor(target, component_data_metadata);
+    if(md) {
+      md.value[property] = value;
+    }
+    else {
+      let data: any = get_data_for(Object.getPrototypeOf(target));
+      target.data = function() {
+        let rt = JSON.parse(JSON.stringify(data));
+        if(typeof this.init_data === 'function') {
+          this.init_data(rt);
+        }
+        return rt;
+      }
+      data[property] = value;
+      target[component_data_metadata] = data;
+    }
+  };
+}
 
 export function property(type: any = null) {
   return (target: any, property: string, descriptor?: PropertyDescriptor) => {
