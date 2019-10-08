@@ -1,0 +1,54 @@
+﻿<article>
+  <div class="card">
+    <ctrl-card-header>
+      <template v-slot:title>
+        <i class="fas fa-address-card"></i> Contact Us
+      </template>
+      <template v-slot:subtitle>
+        You can contact us by mail, telephone or direct message.
+      </template>
+    </ctrl-card-header>
+    <div class="card-body">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Corporate Headquarters</h5>
+          <h6 class="card-subtitle mb-2 text-muted">United States</h6>
+          <p class="card-text">
+            <address>
+              123 Main St.<br />
+              Ste. 321<br />
+              New York, NY 10001<br />
+              <abbr title="phone"><i class="fas fa-phone-square"></i></abbr> 1 + (212) 555-0987
+            </address>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card-header"><i class="fas fa-envelope"></i> Send us a message</div>
+    <form role="form" @submit.prevent="send_message($event)">
+      <div class="card-body">
+        <form-item title="your full name." id="site-contact-us-name" caption="Your Name:" invalid_msg="This is a required field.">
+          <input class="form-control" id="site-contact-us-name" type="text" required placeholder="(required)" v-model="msg.name" />
+        </form-item>
+        <form-item title="your email address." id="site-contact-us-email" caption="Email Address:" invalid_msg="This is a required field.">
+          <input class="form-control" id="site-contact-us-email" type="email" required placeholder="(required)" v-model="msg.email" />
+        </form-item>
+        <form-item title="your company name" id="site-contact-us-company" caption="Company Name:">
+          <input class="form-control" id="site-contact-us-company" type="text" v-model="msg.company" />
+        </form-item>
+        <form-item title="the phone number we can contact you." id="site-contact-us-phone" caption="Phone #:">
+          <input class="form-control" id="site-contact-us-phone" type="tel" v-model="msg.phone" />
+        </form-item>
+        <form-item title="what can we help you with?" id="site-contact-us-msg" caption="Message:" invalid_msg="This is a required field.">
+          <textarea class="form-control" id="site-contact-us-msg" rows="5" required placeholder="how can we help?" v-model="msg.msg"></textarea>
+        </form-item>
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
+      </div>
+    </form>
+  </div>
+  <div class="d-none">
+    <popover-event :event="notify"></popover-event>
+  </div>
+</article>

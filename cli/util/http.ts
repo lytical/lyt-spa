@@ -9,6 +9,7 @@ import { util_crypto } from './crypto';
 import { util_text } from './text';
 
 const xsrf_token_header: string = 'X-XSRF-TOKEN';
+type data_type = 'json' | 'xml' | 'html' | 'script' | 'jsonp' | 'text' | string;
 
 export class util_http {
   static send<_t_ = unknown>(settings: JQuery.AjaxSettings): Observable<_t_> {
@@ -37,7 +38,7 @@ export class util_http {
     });
   }
 
-  static delete<_t_ = unknown>(url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static delete<_t_ = unknown>(url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send({
       method: 'DELETE',
       data,
@@ -47,7 +48,7 @@ export class util_http {
     });
   }
 
-  static delete_secure<_t_ = unknown>(uid: string, pwd: string, url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static delete_secure<_t_ = unknown>(uid: string, pwd: string, url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send_secure({
       method: 'DELETE',
       data,
@@ -57,7 +58,7 @@ export class util_http {
     }, uid, pwd);
   }
 
-  static get<_t_ = unknown>(url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static get<_t_ = unknown>(url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send({
       data,
       headers,
@@ -66,7 +67,7 @@ export class util_http {
     });
   }
 
-  static get_secure<_t_ = unknown>(uid: string, pwd: string, url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static get_secure<_t_ = unknown>(uid: string, pwd: string, url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send_secure({
       data,
       headers,
@@ -75,7 +76,7 @@ export class util_http {
     }, uid, pwd);
   }
 
-  static post<_t_ = unknown>(url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static post<_t_ = unknown>(url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send({
       method: 'POST',
       contentType: data !== undefined ? 'application/json' : undefined,
@@ -87,7 +88,7 @@ export class util_http {
     });
   }
 
-  static post_secure<_t_ = unknown>(uid: string, pwd: string, url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static post_secure<_t_ = unknown>(uid: string, pwd: string, url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send_secure({
       method: 'POST',
       contentType: data !== undefined ? 'application/json' : undefined,
@@ -99,7 +100,7 @@ export class util_http {
     }, uid, pwd);
   }
 
-  static put<_t_ = unknown>(url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static put<_t_ = unknown>(url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send({
       method: 'PUT',
       contentType: data !== undefined ? 'application/json' : undefined,
@@ -111,7 +112,7 @@ export class util_http {
     });
   }
 
-  static put_secure<_t_ = unknown>(uid: string, pwd: string, url: string, dataType: string = 'json', data?: object | string, headers?: JQuery.PlainObject): Observable<_t_> {
+  static put_secure<_t_ = unknown>(uid: string, pwd: string, url: string, data?: object | string, dataType: data_type = 'json', headers?: JQuery.PlainObject): Observable<_t_> {
     return util_http.send_secure({
       method: 'PUT',
       contentType: data !== undefined ? 'application/json' : undefined,

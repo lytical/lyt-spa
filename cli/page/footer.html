@@ -1,12 +1,20 @@
-﻿<footer class="navbar navbar-expand-lg navbar-light fixed-bottom hidden-print">
-  <ul class="mr-auto navbar-nav">
-    <li class="nav-item">
-      <small class="navbar-text">&copy; {{ year }} my company. <span class="text-muted">all rights reserved.</span></small>
-    </li>
-  </ul>
-  <ul class="navbar-nav">
-    <li class="nav-item" v-if="$root.user">
-      <small class="navbar-text">Welcome {{ $root.user }}</small>
-    </li>
-  </ul>
+﻿<footer class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom hidden-print">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#page-footer-navbar" aria-controls="page-footer-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="page-footer-navbar">
+    <ul class="mr-auto navbar-nav">
+      <li class="nav-item">
+        <span class="navbar-text text-muted">&copy; {{ year }} my company</span>
+      </li>
+      <li :title="item.title" v-for="item in link" class="nav-item">
+        <router-link class="nav-link" :to="item.to"><i class="fas fa-angle-right"></i> {{ item.caption }}</router-link>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item" v-if="$root.user">
+        <small class="navbar-text">Welcome {{ $root.user }}</small>
+      </li>
+    </ul>
+  </div>
 </footer>

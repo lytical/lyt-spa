@@ -41,7 +41,7 @@ a component consists of an implementation file (`*.ts`) and a html template file
 #### creating components with @is_component()
 a component is decorated with `@is_component()`.
 
-**usage**: `@is_component({ html: <path>, ... }) export class <class name> {}`
+**usage**: `@is_component({ html: <path>[, ...] }) export class <class name> {}`
 
 the decoration requires an object argument, defined as follows:
 
@@ -66,6 +66,7 @@ import { is_component } from 'component';
 export class product_catalog {
 }
 ```
+i use `keep_alive` on index pages.
 #### intellisense using **component interface**
 a component can optionally implement the `component` interface.
 this is especially helpful with 'intellisense / code complete' functionality in your ide.
@@ -96,7 +97,7 @@ so respectively, component names for the above (if all are not decorated with a 
 - default
 - product-catalog
 - customer-directory
-- customer-purchages
+- customer-purchases
 
 using these components in your html markup is as simple as:
 ```html
@@ -104,17 +105,17 @@ using these components in your html markup is as simple as:
 <default></default>
 <product-catalog></product-catalog>
 <div is="customer-directory"></div>
-<div is="customer-purchages"></div>
+<div is="customer-purchases"></div>
 ...
 ```
 if you must implement multiple components in a file, only one component can, not have a decorated `name`.
-i prefer to implement components in their own files and have thier names infered by the application.
+i prefer to implement components in thier own files and have thier names inferred by the application.
 this allows me to easily identify a component's implementation file, by its name.
 #### change tracking using @data()
 you can indicate what data members (class properties) will participate in vue's change tracking (reactivity). [read more...](https://vuejs.org/v2/guide/instance.html#Data-and-Methods)
 vue requires component's `data()` method to return an object containing these members.
 use the `@data()` decorator to indicate what properties are to be tracked.
-decorate the data member(s) of your class and optionally specify an initial *primative* value.
+decorate the data member(s) of your class and optionally specify an initial *primitive* value.
 
 **usage**: `@data([value]) <member>: <data type>;`
 
@@ -206,12 +207,73 @@ export class my_component implements component {
 all (non vue standard) methods in a component are available as [event handlers](https://vuejs.org/v2/guide/events.html).
 
 ## custom directives
-todo: ...
+developing [custom vue directives](https://vuejs.org/v2/guide/custom-directive.html) are as simple as decorating an exported class with `@is_directive`.
 
-## controls
-todo: ...
+**usage**: `@is_directive([name]) export class <class name> {}`
 
+the directive takes an optional string, indicating its name. the directive's path will infer the name, if not specified.
+
+the following is an example of a custom directive.
+```javascript
+import { is_directive } from 'directive';
+
+@is_directive('focus')
+export class focus_directive {
+  inserted(el: Element) {
+    el.focus();
+  }
+}
+```
+#### intellisense using **directive interface**
+a directive can optionally implement the `directive` interface.
+this is especially helpful with 'intellisense / code complete' functionality in your ide.
+```javascript
+import { directive, is_directive } from 'directive';
+
+@is_directive('focus')
+export class focus_directive implements directive {
+  inserted(el: Element) {
+    el.focus();
+  }
+}
+```
 ## forms
+although, not necessary to use, components in the form directory can increase productivity.
+#### form item
+the most useful component by far, is the `form-item` component.
+it wraps the contained form control in a markup, and provides a visual representation of the control's state, consistent throughout the application.
+
+|form item property|description|
+|---|---|
+|caption|the html to display in the item's `<label></label>`.|
+|id|the enclosed form control id.|
+|invalid_msg|optional message to display when the form control fails validation.|
+
+the states of a form item can be one or more of the following:
+
+|form item state|description|class name|
+|---|---|---|
+|is_touched|true when the user has visited the control.|fi-touched|
+|is_dirty|true when the user changed the value of the control.|fi-dirty|
+|is_valid|true when the control passes form validation.|fi-valid|
+|is_pristine|true when the user has not changed the value of the control.|fi-pristine|
+|is_invalid|true when the control failes form validation.|fi-invalid|
+|is_untouched|true when the user has never visited the control.|fi-untouched|
+
+place the form control within the `<form-item></form-item>` elements.
+the following is a typical implementation of a input form.
+```html
+<form role="form">
+  <form-item title="your full name." id="name" caption="Your Name:" invalid_msg="This is a required field.">
+    <input class="form-control" id="name" type="text" required placeholder="(required)" v-model="name" />
+  </form-item>
+  <form-item title="your email address." id="email" caption="Email Address:" invalid_msg="This is a required field.">
+    <input class="form-control" id="email" type="email" required placeholder="(required)" v-model="email" />
+  </form-item>
+  <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+```
+## controls
 todo: ...
 
 ## popovers

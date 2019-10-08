@@ -6,13 +6,46 @@
 
 import { is_component, component, data } from '../component';
 
+interface link {
+  to: string;
+  caption: string;
+  title: string;
+}
+
 interface model {
-  year?: number;
+  year: number;
+  link: link[];
 }
 
 @is_component({
   html: 'page/footer.html'
 })
 export class page_footer implements component, model {
-  @data(new Date(Date.now()).getUTCFullYear()) year?: number;
+  init_data(data: model) {
+    data.link.push(...[
+      {
+        to: '/site/terms',
+        caption: 'Terms of Use',
+        title: 'view our terms of use statement.'
+      },
+      {
+        to: '/site/privacy',
+        caption: 'Privacy',
+        title: 'view our privacy statement.'
+      },
+      {
+        to: '/site/about-us',
+        caption: 'About Us',
+        title: 'view information about us.'
+      },
+      {
+        to: '/site/contact-us',
+        caption: 'Contact Us',
+        title: 'view information and choices on how to contact us.'
+      }
+    ]);
+  }
+
+  @data(new Date(Date.now()).getUTCFullYear()) year!: number;
+  @data([]) link!: link[];
 }

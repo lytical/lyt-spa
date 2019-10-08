@@ -53,8 +53,8 @@ export class directive {
   }
 }
 
-export function is_directive(md?: directive_metadata) {
+export function is_directive(md?: directive_metadata | string) {
   return (cstr: Function) => {
-    cstr.prototype[directive_metadata] = md || {};
+    cstr.prototype[directive_metadata] = typeof md === 'string' ? { name: md } : md || {};
   }
 }

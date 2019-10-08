@@ -50,6 +50,18 @@
     <Content Include="popover\confirm.html" />
     <Content Include="popover\event.html" />
     <Content Include="README.md" />
+    <Content Include="site\about-us.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="site\contact-us.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="site\privacy.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="site\terms.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="tsconfig.json" />
@@ -80,6 +92,21 @@
     <TypeScriptCompile Include="pubsub\signalr.ts" />
     <TypeScriptCompile Include="pubsub\sockjs.ts" />
     <TypeScriptCompile Include="pubsub\svc.ts" />
+    <TypeScriptCompile Include="site\about-us.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="site\contact-us.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="site\privacy.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="site\svc.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="site\terms.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="util\crypto.ts" />
     <TypeScriptCompile Include="util\deferred.ts" />
     <TypeScriptCompile Include="util\http.ts" />
@@ -91,6 +118,7 @@
     <Folder Include="ctrl\" />
     <Folder Include="form\" />
     <Folder Include="navbar\" />
+    <Folder Include="site\" />
     <Folder Include="page\" />
     <Folder Include="popover\" />
     <Folder Include="pubsub\" />

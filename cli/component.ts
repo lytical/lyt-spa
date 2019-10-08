@@ -89,7 +89,7 @@ function get_data_for(target: any): object {
   return md && typeof md.value === 'function' ? md.value() : get_data_for(Object.getPrototypeOf(target));
 }
 
-export function data(value?: any) {
+export function data(value: any = null) {
   return (target: any, property: string, descriptor?: PropertyDescriptor) => {
     let md = Object.getOwnPropertyDescriptor(target, component_data_metadata);
     if(md) {
@@ -126,7 +126,7 @@ export function property(type: any = null) {
 
 export interface component extends ComponentOptions<Vue>, JQuery.PlainObject {
   can_deactivate?(): boolean | PromiseLike<boolean>;
-  init_data?<_t_>(data: _t_): void;
+  init_data?(data: any): void;
 }
 
 export class component {
