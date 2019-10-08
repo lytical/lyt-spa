@@ -221,10 +221,10 @@ todo: ...
 ## popovers
 todo: ...
 
-#### websocket pubsub messaging
+## websocket pubsub messaging
 websockets pubsub messaging support for [sockjs](https://www.npmjs.com/package/sockjs) or [signalr](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-3.0) is built in.
 server code can send messages to all web clients, or to a specific client. depending on your server configuration, you can configure the client to receive these message.
-### configure for sockjs (node server)
+#### configure for sockjs (node server)
 [sockjs-client](https://www.npmjs.com/package/sockjs-client) is used with the node host. when using the node host, configure the client as follows:
 1) in the [tsconfig.json](/cli/tsconfig.json) file, change `compilerOptions.paths.pubsub...` to **pubsub/sockjs**.
 ```json
@@ -246,7 +246,7 @@ let cfg: RequireConfig = {
   ]
 };
 ```
-### configure for signalr (core server)
+#### configure for signalr (core server)
 when using the core host, configure the client to use the [@aspnet/signalr](https://www.npmjs.com/package/@aspnet/signalr) package as follows:
 1) in the [tsconfig.json](/cli/tsconfig.json) file, change `compilerOptions.paths.pubsub...` to **pubsub/signalr**.
 ```json
