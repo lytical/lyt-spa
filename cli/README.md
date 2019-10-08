@@ -38,7 +38,7 @@ create your components and, add all (public) web resources, anywhere in the `cli
 ## components
 components are fundamental user-interface building blocks for the application.
 a component consists of an implementation file (`*.ts`) and a html template file (`*.html`).
-#### @is_component()
+#### creating components with @is_component()
 a component is decorated with `@is_component()`.
 
 **usage**: `@is_component({ html: <path>, ... }) export class <class name> {}`
@@ -66,7 +66,7 @@ import { is_component } from 'component';
 export class product_catalog {
 }
 ```
-#### component interface
+#### intellisense using **component interface**
 a component can optionally implement the `component` interface.
 this is especially helpful with 'intellisense / code complete' functionality in your ide.
 ```javascript
@@ -110,10 +110,10 @@ using these components in your html markup is as simple as:
 if you must implement multiple components in a file, only one component can, not have a decorated `name`.
 i prefer to implement components in their own files and have thier names infered by the application.
 this allows me to easily identify a component's implementation file, by its name.
-#### @data()
+#### change tracking using @data()
 you can indicate what data members (class properties) will participate in vue's change tracking (reactivity). [read more...](https://vuejs.org/v2/guide/instance.html#Data-and-Methods)
 vue requires component's `data()` method to return an object containing these members.
-utilize the `@data()` decorator to indicate what properties are to be tracked.
+use the `@data()` decorator to indicate what properties are to be tracked.
 decorate the data member(s) of your class and optionally specify an initial *primative* value.
 
 **usage**: `@data([value]) <member>: <data type>;`
@@ -150,9 +150,78 @@ export class my_component implements component {
   @data() name!: string;
 }
 ```
+#### passing data to child components using @property()
+a component can pass data to child components [using props](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props).
+you can indicate a data member as a *vue props* by decorating the member with `@property()`.
+this decorator takes an optional argument that indicates what type of property it is.
 
+**usage**: `@property([type]) <member>: <data type>;`
 
-## websocket pubsub messaging
+```javascript
+import { property, is_component } from 'component';
+
+@is_component({
+  html: 'my-template.html'
+})
+export class my_component implements component {
+  @property(String) title?: string;
+}
+```
+#### computed properties
+components implement [vue computed properties](https://vuejs.org/v2/guide/computed.html) with `getter` accessor methods.
+in the following example, the `full_name` data member will reflect when either the `first_name` or the `last_name` data member changes.
+```javascript
+import { component, is_component } from 'component';
+
+@is_component({
+  html: 'my-template.html'
+})
+export class my_component implements component {
+  get full_name() {
+    return `${this.first_name} ${this.last_name}`;
+  }
+
+  @data() first_name!: string;
+  @data() last_name!: string;
+}
+```
+#### watchers
+components implement [vue watchers](https://vuejs.org/v2/guide/computed.html#Watchers) with `setter` accessor methods.
+in the following example, the `message` data member will be updated when the `name` data member changes.
+```javascript
+import { component, is_component } from 'component';
+
+@is_component({
+  html: 'my-template.html'
+})
+export class my_component implements component {
+  set name(value: string) {
+    this.message = `hello ${this.name}!`;
+  }
+
+  @data() name!: string;
+  @data() message!: string;
+}
+```
+#### event handlers
+all (non vue) methods in a component are available as [event handlers](https://vuejs.org/v2/guide/events.html).
+
+## custom directives
+todo: ...
+
+## pubsub with websockets
+todo: ...
+
+## controls
+todo: ...
+
+## forms
+todo: ...
+
+## popovers
+todo: ...
+
+#### websocket pubsub messaging
 websockets pubsub messaging support for [sockjs](https://www.npmjs.com/package/sockjs) or [signalr](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-3.0) is built in.
 server code can send messages to all web clients, or to a specific client. depending on your server configuration, you can configure the client to receive these message.
 ### configure for sockjs (node server)
