@@ -130,7 +130,7 @@ export class my_component implements component {
   @data('lytical') name!: string;
 }
 ```
-although you can implement a `data()` method in your component, **do not** have both a `data()` method and `@data()` decorated data members, in the component.
+although you can implement a `data()` method in your component, **do not** have both, a `data()` method and `@data()` decorated data members, in the component.
 
 you may further initialize the instance data if you implement an `init_data()` method in your component.
 ```javascript
@@ -152,11 +152,10 @@ export class my_component implements component {
 ```
 #### passing data to child components using @property()
 a component can pass data to child components [using props](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props).
-you can indicate a data member as a *vue props* by decorating the member with `@property()`.
+you can add a component data member to the list of *props* by decorating the member with `@property()`.
 this decorator takes an optional argument that indicates what type of property it is.
 
-**usage**: `@property([type]) <member>: <data type>;`
-
+**usage**: `@property([type]) <member>: <data type>;` [read more about type checks](https://vuejs.org/v2/guide/components-props.html#Type-Checks)
 ```javascript
 import { property, is_component } from 'component';
 
@@ -169,7 +168,7 @@ export class my_component implements component {
 ```
 #### computed properties
 components implement [vue computed properties](https://vuejs.org/v2/guide/computed.html) with `getter` accessor methods.
-in the following example, the `full_name` data member will reflect when either the `first_name` or the `last_name` data member changes.
+in the following example, the `full_name` (read only) data member will reflect changes when either the `first_name` or the `last_name` data member changes.
 ```javascript
 import { component, is_component } from 'component';
 
@@ -196,7 +195,7 @@ import { component, is_component } from 'component';
 })
 export class my_component implements component {
   set name(value: string) {
-    this.message = `hello ${this.name}!`;
+    this.message = `hello ${value}!`;
   }
 
   @data() name!: string;
@@ -204,12 +203,9 @@ export class my_component implements component {
 }
 ```
 #### event handlers
-all (non vue) methods in a component are available as [event handlers](https://vuejs.org/v2/guide/events.html).
+all (non vue standard) methods in a component are available as [event handlers](https://vuejs.org/v2/guide/events.html).
 
 ## custom directives
-todo: ...
-
-## pubsub with websockets
 todo: ...
 
 ## controls

@@ -126,6 +126,7 @@ export function property(type: any = null) {
 
 export interface component extends ComponentOptions<Vue>, JQuery.PlainObject {
   can_deactivate?(): boolean | PromiseLike<boolean>;
+  init_data?<_t_>(data: _t_): void;
 }
 
 export class component {
