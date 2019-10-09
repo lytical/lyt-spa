@@ -24,8 +24,7 @@ namespace lyt.app.settings
     Task<settings> get_settings(ClaimsPrincipal user);
   }
 
-  public class service :
-    service_i
+  public class service : service_i
   {
     public service(IWebHostEnvironment env, ILogger<service> logger)
     {
@@ -110,6 +109,7 @@ namespace lyt.app.settings
 #if use_azure_ad
   [Authorize]
 #endif
+  [ApiController]
   public class controller : ControllerBase
   {
     public controller(service_i svc) =>

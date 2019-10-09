@@ -33,6 +33,7 @@ namespace lyt.app.pubsub
 #if use_azure_ad
   [Authorize]
 #endif
+  [ApiController]
   public class controller : ControllerBase
   {
     public controller(service_i msg) =>

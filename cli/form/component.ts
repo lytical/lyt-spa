@@ -80,7 +80,7 @@ export class form_component implements component, form_model {
 
   protected load_data(route: Route) { }
 
-  protected init_data(data: form_model) {
+  init_data(data: form_model) {
     data.is_new = this.$route.params._id === '$new';
   }
 

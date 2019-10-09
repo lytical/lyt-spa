@@ -8,8 +8,10 @@ namespace lyt.app
 
     public static IServiceCollection add_lyt_spa(this IServiceCollection sc)
     {
+      // todo: add services dynamically...
       _ = sc.AddTransient<settings.service_i, settings.service>()
         .AddTransient<pubsub.service_i, pubsub.service>()
+        .AddTransient<site.contact_us.service_i, site.contact_us.service>()
         .AddSignalR()
         .AddJsonProtocol();
       return sc;

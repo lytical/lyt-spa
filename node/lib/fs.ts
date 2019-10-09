@@ -11,6 +11,37 @@ import * as _path from 'path';
 export const file_invalid_path_pattern = /(?:^\s*\w+:|^\s*\\\\|^\s*\/|\.\.)/;
 
 export class fs {
+  private static async do_find_files(root: string, predicate: ((path: string) => boolean), include_subfolders: boolean): Promise<string[]> {
+    const rt: string[] = [];
+    if(include_subfolders) {
+      const pm: Promise<string[]>[] = [];
+      for(let item of await fs.ls(root, { withFileTypes: true })) {
+        const path = _path.normalize(`${root}/${item.name}`);
+        if(item.isDirectory()) {
+          pm.push(fs.do_find_files(path, predicate, include_subfolders));
+        }
+        else if(predicate(path)) {
+          rt.push(path);
+        }
+      }
+      return [...rt, ...(await Promise.all(pm)).reduce((rs, x) => [...rs, ...x], [])];
+    }
+    else {
+      for(let item of await fs.ls(root, { withFileTypes: true })) {
+        if(!item.isDirectory() && predicate(item.name)) {
+          rt.push(_path.normalize(`${root}/${item.name}`));
+        }
+      }
+    }
+    return rt;
+  }
+
+  static exists(path: _fs.PathLike) {
+    return new Promise<boolean>((res, rej) => {
+      _fs.exists(path, res);
+    });
+  }
+
   static find_ancestor(name: string, path: string, root: string = '/', access: number = _fs.constants.F_OK): Observable<string> {
     return Observable.create((sub: Subscriber<string>) => {
       let seg = _path.resolve(path).split(_path.sep);
@@ -47,10 +78,15 @@ export class fs {
     }
   }
 
-  static exists(path: _fs.PathLike) {
-    return new Promise<boolean>((res, rej) => {
-      _fs.exists(path, res);
-    });
+  static async find_files(root: string, predicate: string | RegExp | ((path: string) => boolean), include_subfolders: boolean = true): Promise<string[]> {
+    if(typeof predicate === 'string') {
+      const pattern = new RegExp(predicate);
+      return fs.do_find_files(_path.resolve(root), path => pattern.test(path), include_subfolders);
+    }
+    if(predicate instanceof RegExp) {
+      return fs.do_find_files(_path.resolve(root), path => predicate.test(path), include_subfolders);
+    }
+    return fs.do_find_files(_path.resolve(root), predicate, include_subfolders);
   }
 
   static ls(path: string): Promise<string[]>;

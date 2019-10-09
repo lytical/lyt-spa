@@ -346,3 +346,4 @@ healthchecksdb
 [Nn]ode/**/*.js.map
 [Cc]ore/**/*.js
 [Cc]ore/**/*.js.map
+test/

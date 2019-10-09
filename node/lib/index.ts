@@ -11,6 +11,7 @@ export * from './crypto';
 export * from './fs';
 export * from './json';
 export * from './logger';
+export * from './modules';
 export * from './net';
 export * from './plain-object';
 export * from './state-machine';

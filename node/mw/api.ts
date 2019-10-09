@@ -7,9 +7,9 @@
 import * as _path from 'path';
 import * as _fs from 'fs';
 import { request, application, response, next_fn } from './request';
-import { fs } from '../lib';
 import { get_method_args, container } from '../ioc';
 import HTTP_STATUS_CODES from 'http-status-enum';
+import { modules } from '../lib/modules';
 
 const request_handler_method: unique symbol = Symbol('lyt-request-handler-method');
 
@@ -31,64 +31,45 @@ export function is_request_handler(arg?: request_handler_args) {
 
 type __cstor = new (arg?: any) => any;
 
-export async function api_use(app: application, path: string, root?: string, set?: Set<__cstor>): Promise<any> {
-  if(!set) {
-    set = new Set<__cstor>();
-  }
+export async function api_use(app: application, path: string, root?: string): Promise<any> {
   console.assert(path, 'invalid argument root cannot be empty');
-  path = _path.resolve(path);
-  if(!root) {
-    root = path;
-  }
-  const pm: [string | undefined, Promise<any>][] = [];
-  for(let item of await fs.ls(path, { withFileTypes: true })) {
-    if(item.isDirectory()) {
-      pm.push([undefined, api_use(app, `${path}/${item.name}`, root, set)]);
-    }
-    else if(_path.extname(item.name) === '.js') {
-      let file = `${path}/${_path.basename(item.name)}`;
-      pm.push([file, import(file)]);
-    }
-  }
-  const mods = await Promise.all(pm.map(x => x[1]));
-  for(let i = mods.length - 1; i >= 0; --i) {
-    let mod = mods[i];
-    if(mod && mod.__esModule) {
-      for(let cstor of Object.getOwnPropertyNames(mod)) {
-        if(cstor !== '__esModule') {
-          let cls = mod[cstor];
-          let item = cls.prototype;
-          while(item) {
-            let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
-            if(pd && !set.has(item)) {
-              set.add(item);
-              let md: { [_: string]: request_handler_args } = pd.value;
-              for(let method_nm of Object.getOwnPropertyNames(md)) {
-                let arg: request_handler_args = md[method_nm];
-                if(arg.path === undefined) {
-                  arg.path = [pm[i][0]!];
+  root = _path.normalize(_path.resolve(root ? root : path));
+  const set = new Set<__cstor>();
+  for(let mod of await modules.get_modules(path)) {
+    for(let cstor of Object.getOwnPropertyNames(mod[1])) {
+      if(cstor !== '__esModule') {
+        let cls = mod[1][cstor];
+        let item = cls.prototype;
+        while(item) {
+          let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
+          if(pd && !set.has(item)) {
+            set.add(item);
+            let md: { [_: string]: request_handler_args } = pd.value;
+            for(let method_nm of Object.getOwnPropertyNames(md)) {
+              let arg: request_handler_args = md[method_nm];
+              if(arg.path === undefined) {
+                arg.path = [mod[0]];
+              }
+              for(let path of typeof arg.path === 'string' || arg.path instanceof RegExp ? [arg.path!] : arg.path!) {
+                if(typeof path === 'string' && path.startsWith(root)) {
+                  path = path.substr(root.length).replace(/\\/g, '/');
+                  let m = path.match(/([^\.]+)\.js(.*)/);
+                  if(m) {
+                    path = `${m[1]}${m[2]}`;
+                  }
                 }
-                for(let path of typeof arg.path === 'string' || arg.path instanceof RegExp ? [arg.path!] : arg.path!) {
-                  if(typeof path === 'string' && path.startsWith(root)) {
-                    path = path.substr(root.length).replace(/\\/g, '/');
-                    let m = path.match(/([^\.]+)\.js(.*)/);
-                    if(m) {
-                      path = `${m[1]}${m[2]}`;
-                    }
-                  }
-                  if(!arg.method) {
-                    use(cls, item, method_nm, path, app);
-                  }
-                  else {
-                    for(let method of typeof arg.method === 'string' ? [arg.method] : arg.method) {
-                      use(cls, item, method_nm, path, app, method);
-                    }
+                if(!arg.method) {
+                  use(cls, item, method_nm, path, app);
+                }
+                else {
+                  for(let method of typeof arg.method === 'string' ? [arg.method] : arg.method) {
+                    use(cls, item, method_nm, path, app, method);
                   }
                 }
               }
             }
-            item = Object.getPrototypeOf(item);
           }
+          item = Object.getPrototypeOf(item);
         }
       }
     }

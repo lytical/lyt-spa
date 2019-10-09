@@ -6,10 +6,27 @@
 
 import { get_method_args } from './inject';
 
+const ioc_argument_injectabe: unique symbol = Symbol('ioc-argument-injectable');
+
+export function injectable(is_singleton: boolean = false, imp_type?: (new (..._: any) => any)) {
+  return (cstr: Function) => {
+    cstr.prototype[ioc_argument_injectabe] = is_singleton;
+  }
+}
+
 export class container {
-  set(type: Function, arg: any): void;
-  set(type: new (...arg: any) => any, arg: any): void {
-    this.map.set(type, arg);
+  constructor(path?: string | string[]) {
+    if(typeof path === 'string') {
+      path = [path];
+    }
+    if(Array.isArray(path)) {
+      for(let root of path) {
+        this.load_injectables(root);
+      }
+    }
+  }
+
+  public load_injectables(path: string) {
   }
 
   get<_t_ = any>(type: Function): _t_ | undefined;
@@ -29,6 +46,11 @@ export class container {
       return new arg(...get_method_args(this, arg));
     }
     return undefined;
+  }
+
+  set(type: Function, arg: any): void;
+  set(type: new (...arg: any) => any, arg: any): void {
+    this.map.set(type, arg);
   }
 
   private map: Map<new (...arg: any) => any, any> = new Map<new (...arg: any) => any, any>();
