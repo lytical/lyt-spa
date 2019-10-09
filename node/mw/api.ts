@@ -35,43 +35,39 @@ export async function api_use(app: application, path: string, root?: string): Pr
   console.assert(path, 'invalid argument root cannot be empty');
   root = _path.normalize(_path.resolve(root ? root : path));
   const set = new Set<__cstor>();
-  for(let mod of await modules.get_modules(path)) {
-    for(let cstor of Object.getOwnPropertyNames(mod[1])) {
-      if(cstor !== '__esModule') {
-        let cls = mod[1][cstor];
-        let item = cls.prototype;
-        while(item) {
-          let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
-          if(pd && !set.has(item)) {
-            set.add(item);
-            let md: { [_: string]: request_handler_args } = pd.value;
-            for(let method_nm of Object.getOwnPropertyNames(md)) {
-              let arg: request_handler_args = md[method_nm];
-              if(arg.path === undefined) {
-                arg.path = [mod[0]];
+  for(let func of await modules.find_module_functions(path, () => true)) {
+    let cls = func[1];
+    let item = cls.prototype;
+    while(item) {
+      let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
+      if(pd && !set.has(item)) {
+        set.add(item);
+        let md: { [_: string]: request_handler_args } = pd.value;
+        for(let method_nm of Object.getOwnPropertyNames(md)) {
+          let arg: request_handler_args = md[method_nm];
+          if(arg.path === undefined) {
+            arg.path = [func[0]];
+          }
+          for(let path of typeof arg.path === 'string' || arg.path instanceof RegExp ? [arg.path!] : arg.path!) {
+            if(typeof path === 'string' && path.startsWith(root)) {
+              path = path.substr(root.length).replace(/\\/g, '/');
+              let m = path.match(/([^\.]+)\.js(.*)/);
+              if(m) {
+                path = `${m[1]}${m[2]}`;
               }
-              for(let path of typeof arg.path === 'string' || arg.path instanceof RegExp ? [arg.path!] : arg.path!) {
-                if(typeof path === 'string' && path.startsWith(root)) {
-                  path = path.substr(root.length).replace(/\\/g, '/');
-                  let m = path.match(/([^\.]+)\.js(.*)/);
-                  if(m) {
-                    path = `${m[1]}${m[2]}`;
-                  }
-                }
-                if(!arg.method) {
-                  use(cls, item, method_nm, path, app);
-                }
-                else {
-                  for(let method of typeof arg.method === 'string' ? [arg.method] : arg.method) {
-                    use(cls, item, method_nm, path, app, method);
-                  }
-                }
+            }
+            if(!arg.method) {
+              use(cls, item, method_nm, path, app);
+            }
+            else {
+              for(let method of typeof arg.method === 'string' ? [arg.method] : arg.method) {
+                use(cls, item, method_nm, path, app, method);
               }
             }
           }
-          item = Object.getPrototypeOf(item);
         }
       }
+      item = Object.getPrototypeOf(item);
     }
   }
 }
