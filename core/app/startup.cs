@@ -47,6 +47,7 @@ namespace lyt.app
         .Where(x => x.GetCustomAttribute(typeof(injectableAttribute)) != null))
       {
         var attr = (injectableAttribute)type.GetCustomAttribute(typeof(injectableAttribute));
+        Debug.Assert(!type.IsInterface || attr.type != null, $"injectable interfaces must indicate an implementation type.");
         switch(attr.lifetime)
         {
           case injectable_lifetime.transient:
