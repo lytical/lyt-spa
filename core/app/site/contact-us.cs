@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace lyt.app.site.contact_us
+namespace lyt.app.site
 {
-  public class incomiming_msg
+  public class contact_us_msg
   {
     string company { get; set; }
     string email { get; set; }
@@ -14,14 +14,14 @@ namespace lyt.app.site.contact_us
     string phone { get; set; }
   }
 
-  public interface service_i
+  public interface contact_us_service_i
   {
-    Task<bool> handle_msg(incomiming_msg body, ClaimsPrincipal user);
+    Task<bool> handle_msg(contact_us_msg body, ClaimsPrincipal user);
   }
 
-  public class service : service_i
+  public class contact_us_service : contact_us_service_i
   {
-    public Task<bool> handle_msg(incomiming_msg body, ClaimsPrincipal user)
+    public Task<bool> handle_msg(contact_us_msg body, ClaimsPrincipal user)
     {
       // todo: process the message here.
       return Task.FromResult(true);
@@ -32,15 +32,15 @@ namespace lyt.app.site.contact_us
   [Authorize]
 #endif
   [ApiController]
-  public class controller : ControllerBase
+  public class contact_us_controller : ControllerBase
   {
-    public controller(service_i svc) =>
+    public contact_us_controller(contact_us_service_i svc) =>
       _svc = svc;
 
     [HttpPut("site/contact-us-msg")]
-    public Task<bool> handle_msg([FromBody] incomiming_msg body) =>
+    public Task<bool> handle_msg([FromBody] contact_us_msg body) =>
       _svc.handle_msg(body, User);
 
-    readonly service_i _svc;
+    readonly contact_us_service_i _svc;
   }
 }

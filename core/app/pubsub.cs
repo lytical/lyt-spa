@@ -3,22 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace lyt.app.pubsub
+namespace lyt.app
 {
-  public class hub : Hub
+  public class pubsub_hub : Hub
   {
     public string get_client_id() => Context.ConnectionId;
   }
 
-  public interface service_i
+  public interface pubsub_service_i
   {
     Task send(string id, object payload);
     Task send_to(string client_id, string id, object payload);
   }
 
-  public class service : service_i
+  public class pubsub_service : pubsub_service_i
   {
-    public service(IHubContext<hub> hub_ctx) =>
+    public pubsub_service(IHubContext<pubsub_hub> hub_ctx) =>
       this._hub_ctx = hub_ctx;
 
     public Task send(string id, object payload) =>
@@ -27,16 +27,16 @@ namespace lyt.app.pubsub
     public Task send_to(string client_id, string id, object payload) =>
       _hub_ctx.Clients.Client(client_id).SendAsync("recv", id, payload);
 
-    readonly IHubContext<hub> _hub_ctx;
+    readonly IHubContext<pubsub_hub> _hub_ctx;
   }
 
 #if use_azure_ad
   [Authorize]
 #endif
   [ApiController]
-  public class controller : ControllerBase
+  public class pubsub_controller : ControllerBase
   {
-    public controller(service_i msg) =>
+    public pubsub_controller(pubsub_service_i msg) =>
       _msg = msg;
 
     [HttpPost("pubsub/send/{id}")]
@@ -47,6 +47,6 @@ namespace lyt.app.pubsub
     public Task send_to(string client_id, string id, [FromBody] object body) =>
       _msg.send_to(client_id, id, body);
 
-    readonly service_i _msg;
+    readonly pubsub_service_i _msg;
   }
 }

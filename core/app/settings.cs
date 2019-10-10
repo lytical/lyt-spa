@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace lyt.app.settings
+namespace lyt.app
 {
   public class settings
   {
@@ -18,15 +18,15 @@ namespace lyt.app.settings
     public string user { get; set; }
   }
 
-  public interface service_i
+  public interface settings_service_i
   {
     Task<IEnumerable<string>> get_components(ClaimsPrincipal user);
     Task<settings> get_settings(ClaimsPrincipal user);
   }
 
-  public class service : service_i
+  public class settings_service : settings_service_i
   {
-    public service(IWebHostEnvironment env, ILogger<service> logger)
+    public settings_service(IWebHostEnvironment env, ILogger<settings_service> logger)
     {
       _env = env;
       _logger = logger;
@@ -97,7 +97,7 @@ namespace lyt.app.settings
     }
 
     IWebHostEnvironment _env;
-    ILogger<service> _logger;
+    ILogger<settings_service> _logger;
     static readonly Regex _html_pattern = new Regex(@"define\(""text!([^\.]+)\.html""");
     static readonly Regex _module_pattern = new Regex(@"define\(""([^""]+)"",");
 #if !DEBUG
@@ -110,15 +110,15 @@ namespace lyt.app.settings
   [Authorize]
 #endif
   [ApiController]
-  public class controller : ControllerBase
+  public class settings_controller : ControllerBase
   {
-    public controller(service_i svc) =>
+    public settings_controller(settings_service_i svc) =>
       _svc = svc;
 
     [HttpGet("app/settings")]
     public Task<settings> get_settings() =>
       _svc.get_settings(User);
 
-    readonly service_i _svc;
+    readonly settings_service_i _svc;
   }
 }
