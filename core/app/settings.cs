@@ -18,6 +18,7 @@ namespace lyt.app
     public string user { get; set; }
   }
 
+  [injectable(typeof(settings_service))]
   public interface settings_service_i
   {
     Task<IEnumerable<string>> get_components(ClaimsPrincipal user);

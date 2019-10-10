@@ -10,6 +10,7 @@ namespace lyt.app
     public string get_client_id() => Context.ConnectionId;
   }
 
+  [injectable(typeof(pubsub_service))]
   public interface pubsub_service_i
   {
     Task send(string id, object payload);

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using lyt.app;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace lyt.app.site
+namespace lyt.site
 {
   public class contact_us_msg
   {
@@ -14,6 +15,7 @@ namespace lyt.app.site
     string phone { get; set; }
   }
 
+  [injectable(typeof(contact_us_service))]
   public interface contact_us_service_i
   {
     Task<bool> handle_msg(contact_us_msg body, ClaimsPrincipal user);
@@ -23,7 +25,7 @@ namespace lyt.app.site
   {
     public Task<bool> handle_msg(contact_us_msg body, ClaimsPrincipal user)
     {
-      // todo: process the message here.
+      // todo: process the request here.
       return Task.FromResult(true);
     }
   }
