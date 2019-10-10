@@ -22,7 +22,7 @@ let cfg: RequireConfig = {
     'app',
     {
       name: 'pubsub',
-      main: 'sockjs'
+      main: 'signalr'
     }
   ],
   paths: {

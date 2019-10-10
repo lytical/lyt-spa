@@ -5,7 +5,9 @@
 */
 
 import * as _crypto from 'crypto';
+import { injectable } from '../ioc/container';
 
+@injectable()
 export class crypto {
   create_key(id?: string, pwd?: string, domain?: string): string {
     return this.hash(`${domain || ''}${(id || '').trim()}${pwd}`);

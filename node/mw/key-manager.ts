@@ -4,13 +4,8 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { container } from '../ioc/container';
+import { injectable } from '../ioc/container';
 
-export abstract class key_manager {
-  static add(ioc: container) {
-    ioc.set(key_manager, new key_manager_imp());
-  }
-}
-
-class key_manager_imp extends key_manager {
+@injectable()
+export class key_manager {
 }

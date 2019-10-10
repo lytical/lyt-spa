@@ -5,7 +5,7 @@
 */
 
 import * as _express from 'express';
-import { mw_app } from './mw/app';
+import { mw_app, app_config } from './mw/app';
 import { application } from './mw/request';
 import { config } from './lib/config';
 import spa_init from './spa';
@@ -16,7 +16,8 @@ spa_init.init(app, true);
 app_service.init(app);
 
 app.once('use-middleware', (express: application, deferred) => {
-  if(express.svc!.get(config).dev === null) {
+  let cfg = express.svc!.get<app_config>(config);
+  if(cfg && cfg.dev === null) {
     express.use(_express.static('../cli'));
     express.use('/node_modules', _express.static('../node_modules'));
   }

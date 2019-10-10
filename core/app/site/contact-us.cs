@@ -23,7 +23,7 @@ namespace lyt.app.site.contact_us
   {
     public Task<bool> handle_msg(incomiming_msg body, ClaimsPrincipal user)
     {
-      // process the message here.
+      // todo: process the message here.
       return Task.FromResult(true);
     }
   }

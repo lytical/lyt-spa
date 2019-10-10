@@ -75,7 +75,7 @@ export class mw_app extends _events.EventEmitter {
   async run(ioc?: container): Promise<void> {
     if(!ioc) {
       ioc = new container();
-      ioc.load_injectables(`${__dirname}/..`);
+      await ioc.load_injectables(`${__dirname}/..`);
     }
     if(!ioc.get<logger>(logger)) {
       ioc.set(logger, logger.create((msg, level) => {
@@ -218,10 +218,15 @@ export class mw_app extends _events.EventEmitter {
   }
 
   private async register_services(ioc: container) {
-    ioc.set(config, {});
-    ioc.set(json_reviver, json.reviver);
-    ioc.set(json_replacer, json.replacer);
-    ioc.set(crypto, crypto);
+    if(ioc.get(config) === undefined) {
+      ioc.set(config, {});
+    }
+    if(ioc.get(json_reviver) === undefined) {
+      ioc.set(json_reviver, json.reviver);
+    }
+    if(ioc.get(json_replacer) === undefined) {
+      ioc.set(json_replacer, json.replacer);
+    }
     let deferred: Promise<any>[] = [];
     this.emit('services-add', ioc, deferred);
     await Promise.all(deferred);

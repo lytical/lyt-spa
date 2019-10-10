@@ -5,9 +5,28 @@
 */
 
 import { injectable } from '../ioc/container';
+import { text } from './text';
 type logger_level = 'debug' | 'info' | 'warn' | 'trace' | 'error';
 
-@injectable()
+@injectable(logger.create((msg, level) => {
+  switch(level) {
+    case 'debug':
+      console.debug(text.debug(msg.toString()));
+      break;
+    case 'error':
+      console.error(text.error(msg.toString()));
+      break;
+    case 'info':
+      console.info(msg);
+      break;
+    case 'trace':
+      console.trace(text.trace(msg.toString()));
+      break;
+    case 'warn':
+      console.warn(text.warn(msg.toString()));
+      break;
+  }
+}))
 export abstract class logger {
   debug(msg: any): void { return this.log(msg, 'debug'); }
   error(msg: any): void { return this.log(msg, 'error'); }

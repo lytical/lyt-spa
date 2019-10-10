@@ -7,4 +7,5 @@
 import { plain_object } from './plain-object';
 
 export class config implements plain_object {
+  config_path?: string;
 }

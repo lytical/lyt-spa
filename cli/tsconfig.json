@@ -4,7 +4,7 @@
     "composite": true,
     "downlevelIteration": true,
     "paths": {
-      "pubsub": [ "pubsub/sockjs" ],
+      "pubsub": [ "pubsub/signalr" ],
       "navbar": [ "navbar/main" ]
     },
     "lib": [ "dom", "es6" ],
