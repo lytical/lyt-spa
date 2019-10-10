@@ -252,7 +252,7 @@ it wraps the contained form control in a markup, and provides a visual represent
 |id|the enclosed form control id.|
 |invalid_msg|optional message to display when the form control fails validation.|
 
-the states of a form item can be one or more of the following:
+the states of a form item and its element's *class* attribute can be one or more of the following:
 
 |form item state|description|class name|
 |---|---|---|
@@ -264,6 +264,7 @@ the states of a form item can be one or more of the following:
 |is_untouched|true when the user has never visited the control.|fi-untouched|
 
 place the form control within the `<form-item></form-item>` elements.
+
 the following is a typical implementation of a input form.
 ```html
 <form role="form">
@@ -286,7 +287,7 @@ a parent form control must be enclosed in a [form-item](#form-item-component) co
 the **selector** is optional and identifies the parent element of the form controls.
 if the selector argument is omitted, then the applied element is the parent element.
 
-the element *class* of the applied element, can be one or more of the following:
+the applied element's *class* attribute, can be one or more of the following:
 
 |class name|description|
 |---|---|
@@ -296,6 +297,8 @@ the element *class* of the applied element, can be one or more of the following:
 |fi-pristine|true when the user has not changed the value of any parent control.|
 |fi-invalid|true when any parent control failes form validation.|
 |fi-untouched|true when the user has never visited any parent control.|
+
+for example, this directive is helpful to style a nav-item (tab; pill; ...) based on the state of associated form.
 
 ## controls
 todo: ...

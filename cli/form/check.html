@@ -1,4 +1,5 @@
 ﻿<div class="form-check">
   <slot></slot>
   <label class="form-check-label" :for="id" v-html="caption"></label>
+  <div class="text-danger" v-if="is_touched&&is_invalid" v-html="invalid_msg"></div>
 </div>
