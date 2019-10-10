@@ -278,7 +278,8 @@ developing [custom vue directives](https://vuejs.org/v2/guide/custom-directive.h
 
 **usage**: `@is_directive([name]) export class <class name> {}`
 
-the directive takes an optional string, indicating its name. the directive's path will infer the name, if not specified.
+the directive takes an optional string, indicating its name.
+the directive's path will infer the name (based on the path of the implementation file), if not specified.
 
 the following is an example of a custom directive.
 ```javascript
@@ -290,6 +291,12 @@ export class focus_directive {
     el.focus();
   }
 }
+```
+```html
+<!-- my-template.html -->
+<form>
+  <input type="text" v-focus />
+</form>
 ```
 #### intellisense using **directive interface**
 a directive can optionally implement the `directive` interface.
@@ -346,7 +353,7 @@ the *status directive* will update the applied element's *class list* according 
 the parent element can either be the applied, or the element identified by the *selector* argument of the directive.
 a parent form control must be enclosed in a [form-item](#form-item-component) component.
 
-**usage**: <*element* v-form-status[="selector"] />
+**usage**: <*element* v-form-status[:selector] />
 
 the **selector** is optional and identifies the parent element of the form controls.
 if the selector argument is omitted, then the applied element is the parent element.
@@ -356,13 +363,33 @@ the applied element's *class* attribute, can be one or more of the following:
 |class name|description|
 |---|---|
 |fi-touched|when the user has visited any parent control.|
+|fi-untouched|when the user has not visited any parent control.|
 |fi-dirty|when the user changed the value of any parent control.|
-|fi-valid|when all parent controls pass form validation.|
 |fi-pristine|when the user has not changed the value of any parent control.|
+|fi-valid|when all parent controls pass form validation.|
 |fi-invalid|when any parent control failes form validation.|
-|fi-untouched|when the user has never visited any parent control.|
+|fi-touched-all|when the user has visited all parent control.|
+|fi-dirty-all|when the user changed the value of all parent control.|
+|fi-invalid-all|when all parent control failes form validation.|
 
 for example, this directive is helpful to style a nav-item (tab; pill; ...) based on the state of associated form.
+```css
+/*my-style.css*/
+div.alert-danger.show-when-invalid.fi-valid-all,
+div.alert-danger.show-when-invalid.fi-untouched-all {
+  display: none;
+}
+div.alert-danger.show-when-invalid.fi-invalid.fi-touched {
+  display: initial;
+}
+```
+```html
+<!-- my-template.html -->
+<div class="alert alert-danger show-when-invalid" v-form-status:#my-form>please correct form errors.</div>
+<form id="my-form">
+  <input type="text" required />
+</form>
+```
 
 ## controls
 todo: ...

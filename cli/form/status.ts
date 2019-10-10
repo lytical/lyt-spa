@@ -32,8 +32,6 @@ export class form_status extends directive {
           me.removeClass(check);
           me.addClass(reciprocal);
         }
-      }
-      const all = (check: string) => {
         if(item.filter(function() {
           return $(this).hasClass(check)
         }).length === item.length) {
@@ -47,12 +45,6 @@ export class form_status extends directive {
         update('fi-invalid', 'fi-valid');
         update('fi-touched', 'fi-untouched');
         update('fi-dirty', 'fi-pristine');
-        all('fi-invalid');
-        all('fi-touched');
-        all('fi-dirty');
-        all('fi-valid');
-        all('fi-untouched');
-        all('fi-pristine');
       }
       const opt = {
         attributeFilter: ['class']
