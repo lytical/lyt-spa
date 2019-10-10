@@ -5,6 +5,7 @@
 */
 
 import { get_method_args } from './inject';
+import { modules } from '../lib/modules';
 
 const ioc_argument_injectabe: unique symbol = Symbol('ioc-argument-injectable');
 
@@ -15,20 +16,6 @@ export function injectable(is_singleton: boolean = false, imp_type?: (new (..._:
 }
 
 export class container {
-  constructor(path?: string | string[]) {
-    if(typeof path === 'string') {
-      path = [path];
-    }
-    if(Array.isArray(path)) {
-      for(let root of path) {
-        this.load_injectables(root);
-      }
-    }
-  }
-
-  public load_injectables(path: string) {
-  }
-
   get<_t_ = any>(type: Function): _t_ | undefined;
   get<_t_ = any>(type: new (..._: any) => any): _t_ | undefined {
     if(type === container) {
@@ -46,6 +33,12 @@ export class container {
       return new arg(...get_method_args(this, arg));
     }
     return undefined;
+  }
+
+  public async load_injectables(path: string = 'node'): Promise<any> {
+    for(let func of await modules.find_module_functions(path, x => Object.getOwnPropertyDescriptor(x.prototype, ioc_argument_injectabe) !== undefined)) {
+      console.debug({ injectable: func });
+    }
   }
 
   set(type: Function, arg: any): void;

@@ -7,7 +7,7 @@
 import * as _cluster from 'cluster';
 import { EventEmitter } from 'events';
 import { Observable, Subject } from 'rxjs';
-import { container } from '../ioc';
+import { container } from '../ioc/container';
 import { topic_name_worker_started } from './app';
 
 type payload = [string, any];

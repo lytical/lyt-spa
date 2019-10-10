@@ -4,8 +4,8 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_directive, directive, directive_binding } from "../directive";
-import { VNode } from "vue";
+import { is_directive, directive, directive_binding } from '../directive';
+import { VNode } from 'vue';
 
 interface form_status_directive_binding extends directive_binding {
   obs: MutationObserver[];

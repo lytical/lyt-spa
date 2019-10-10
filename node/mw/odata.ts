@@ -5,7 +5,9 @@
 */
 
 import { Observable, Observer } from 'rxjs';
-import { text, state_machine, plain_object } from '../lib';
+import { plain_object } from '../lib/plain-object';
+import { state_machine } from '../lib/state-machine';
+import { text } from '../lib/text';
 import { RequestHandler } from 'express';
 
 export interface $filter extends plain_object {

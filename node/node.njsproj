@@ -62,7 +62,6 @@
     <TypeScriptCompile Include="data\repos.ts" />
     <TypeScriptCompile Include="ioc\config.ts" />
     <TypeScriptCompile Include="ioc\container.ts" />
-    <TypeScriptCompile Include="ioc\index.ts" />
     <TypeScriptCompile Include="ioc\inject.ts" />
     <TypeScriptCompile Include="lib\buffer.ts" />
     <TypeScriptCompile Include="lib\cancellation.ts" />
@@ -70,7 +69,6 @@
     <TypeScriptCompile Include="lib\config.ts" />
     <TypeScriptCompile Include="lib\crypto.ts" />
     <TypeScriptCompile Include="lib\fs.ts" />
-    <TypeScriptCompile Include="lib\index.ts" />
     <TypeScriptCompile Include="lib\json.ts" />
     <TypeScriptCompile Include="lib\logger.ts" />
     <TypeScriptCompile Include="lib\modules.ts">
@@ -83,7 +81,6 @@
     <TypeScriptCompile Include="mw\api.ts" />
     <TypeScriptCompile Include="mw\app.ts" />
     <TypeScriptCompile Include="mw\error.ts" />
-    <TypeScriptCompile Include="mw\index.ts" />
     <TypeScriptCompile Include="mw\key-manager.ts" />
     <TypeScriptCompile Include="mw\message.ts" />
     <TypeScriptCompile Include="mw\odata.ts" />

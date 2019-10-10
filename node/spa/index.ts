@@ -7,9 +7,17 @@
 import * as _express from 'express';
 import * as _path from 'path';
 import cookieParser = require('cookie-parser');
-import { app_config, mw_app, xsrf_token, secured_by, web_sock, api_use } from '../mw';
-import { config, fs, cmd_line, json_reviver } from '../lib';
-import { container, add_command_line_to_config, add_json_file_to_config } from '../ioc';
+import { api_use } from '../mw/api';
+import { web_sock } from '../mw/web-sock';
+import { secured_by } from '../mw/secured-by';
+import { xsrf_token } from '../mw/xsrf-token';
+import { app_config, mw_app } from '../mw/app';
+import { json_reviver } from '../lib/json';
+import { cmd_line } from '../lib/cmd-line';
+import { fs } from '../lib/fs';
+import { config } from '../lib/config';
+import { container } from '../ioc/container';
+import { add_command_line_to_config, add_json_file_to_config } from '../ioc/config';
 
 export default class spa_init {
   static init(app: mw_app, use_static: boolean = false, api_path: string = 'node', cli_path: string = 'cli') {

@@ -5,8 +5,10 @@
 */
 
 import { RequestHandler } from 'express';
-import { text, config, crypto } from '../lib';
-import { container } from '../ioc';
+import { crypto } from '../lib/crypto';
+import { config } from '../lib/config';
+import { text } from '../lib/text';
+import { container } from '../ioc/container';
 import { request } from './request';
 import { app_config } from './app';
 

@@ -4,9 +4,10 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { next_fn, request, response, is_request_handler } from '../mw';
+import { next_fn, request, response } from '../mw/request';
+import { is_request_handler } from '../mw/api';
 import { spa_service } from '../spa';
-import { inject } from '../ioc';
+import { inject } from '../ioc/inject';
 
 export class app_settings {
   @is_request_handler({ method: 'GET' })

@@ -7,11 +7,9 @@
 import { fs } from './fs';
 import * as _path from 'path';
 
-type __cstor = new (arg?: any) => any;
-
 export class modules {
-  static find_module_functions(path: string, predicate: ((item: any, path: string) => boolean)): Promise<[string, any][]> {
-    const set = new Set<__cstor>();
+  static find_module_functions(path: string, predicate: ((item: Function, path: string) => boolean)): Promise<[string, Function][]> {
+    const set = new Set<Function>();
     return modules.find_module_items(path, (item, path) => {
       if(item.prototype === undefined || set.has(item)) {
         return false;

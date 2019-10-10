@@ -8,7 +8,7 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { Request, NextFunction, RequestHandler, Response, Application } from 'express';
 import { Observable } from 'rxjs';
 import HTTP_STATUS_CODES from 'http-status-enum';
-import { container } from '../ioc';
+import { container } from '../ioc/container';
 
 declare module 'http' {
   interface IncomingMessage {

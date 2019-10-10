@@ -4,9 +4,9 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component, data } from "../component";
-import { popover_confirm, popover_confirm_msg } from "./confirm";
-import { PopoverOption } from "bootstrap";
+import { is_component, data } from '../component';
+import { popover_confirm, popover_confirm_msg } from './confirm';
+import { PopoverOption } from 'bootstrap';
 
 export interface popover_can_delete_msg extends popover_confirm_msg {
   item: string;

@@ -7,7 +7,8 @@
 import * as _path from 'path';
 import * as _fs from 'fs';
 import { request, application, response, next_fn } from './request';
-import { get_method_args, container } from '../ioc';
+import { container } from '../ioc/container';
+import { get_method_args } from '../ioc/inject';
 import HTTP_STATUS_CODES from 'http-status-enum';
 import { modules } from '../lib/modules';
 
@@ -34,14 +35,12 @@ type __cstor = new (arg?: any) => any;
 export async function api_use(app: application, path: string, root?: string): Promise<any> {
   console.assert(path, 'invalid argument root cannot be empty');
   root = _path.normalize(_path.resolve(root ? root : path));
-  const set = new Set<__cstor>();
   for(let func of await modules.find_module_functions(path, () => true)) {
-    let cls = func[1];
+    let cls: __cstor = <any>func[1];
     let item = cls.prototype;
     while(item) {
       let pd = Object.getOwnPropertyDescriptor(item, request_handler_method);
-      if(pd && !set.has(item)) {
-        set.add(item);
+      if(pd) {
         let md: { [_: string]: request_handler_args } = pd.value;
         for(let method_nm of Object.getOwnPropertyNames(md)) {
           let arg: request_handler_args = md[method_nm];

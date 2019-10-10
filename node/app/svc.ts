@@ -4,10 +4,14 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { container, inject } from '../ioc';
-import { app_config, mw_app, message, topic_name_worker_started } from '../mw';
+import { container } from '../ioc/container';
+import { inject } from '../ioc/inject';
+import { app_config, mw_app, topic_name_worker_started } from '../mw/app';
+import { message } from '../mw/message';
 import { repos } from '../data/repos';
-import { crypto, config, logger } from '../lib';
+import { logger } from '../lib/logger';
+import { config } from '../lib/config';
+import { crypto } from '../lib/crypto';
 
 const topic_name = 'primary-repos:updated';
 export const not_configured_error = 'not-configured';

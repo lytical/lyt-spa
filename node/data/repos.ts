@@ -6,8 +6,9 @@
 
 import { URL } from 'url';
 import { db } from './db';
-import { file_invalid_path_pattern } from '../lib';
-import { container, get_method_args } from '../ioc';
+import { file_invalid_path_pattern } from '../lib/fs';
+import { container } from '../ioc/container';
+import { get_method_args } from '../ioc/inject';
 
 export interface repos {
   close(force?: boolean): Promise<any>;

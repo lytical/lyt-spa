@@ -4,8 +4,8 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { Observable } from "rxjs";
-import { util_http } from "../util/http";
+import { Observable } from 'rxjs';
+import { util_http } from '../util/http';
 
 export interface site_contact_us_msg {
   company?: string;

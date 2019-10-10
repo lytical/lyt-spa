@@ -1,4 +1,4 @@
-﻿import { buffer } from "./buffer";
+﻿import { buffer } from './buffer';
 
 /* @preserve
   (c) 2018 lytical, inc. all rights are reserved.

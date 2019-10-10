@@ -4,8 +4,8 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { is_component, property, data } from "../component";
-import { Observer } from "rxjs";
+import { is_component, property, data } from '../component';
+import { Observer } from 'rxjs';
 
 export type navbar_search_event = [Event, string | undefined];
 

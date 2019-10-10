@@ -5,8 +5,9 @@
 */
 
 import * as _express from 'express';
-import { mw_app, application } from './mw';
-import { config } from './lib';
+import { mw_app } from './mw/app';
+import { application } from './mw/request';
+import { config } from './lib/config';
 import spa_init from './spa';
 import { app_service } from './app/svc';
 

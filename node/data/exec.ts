@@ -6,7 +6,7 @@
 
 import { fs } from '../lib/fs';
 import { repos } from './repos';
-import { container } from '../ioc';
+import { container } from '../ioc/container';
 
 function show_usage() {
   console.info(`

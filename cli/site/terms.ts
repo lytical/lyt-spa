@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { component, is_component } from "../component";
+import { component, is_component } from '../component';
 
 @is_component({
   html: 'site/terms.html',

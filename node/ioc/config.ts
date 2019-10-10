@@ -5,7 +5,11 @@
 */
 
 import * as _path from 'path';
-import { cmd_line, config, fs, json_reviver, logger } from '../lib';
+import { cmd_line } from '../lib/cmd-line';
+import { config } from '../lib/config';
+import { fs } from '../lib/fs';
+import { logger } from '../lib/logger';
+import { json_reviver } from '../lib/json';
 import { container } from './container';
 
 export function add_command_line_to_config(ioc: container) {

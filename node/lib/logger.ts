@@ -4,8 +4,10 @@
   please refer to your license agreement on the use of this file.
 */
 
+import { injectable } from '../ioc/container';
 type logger_level = 'debug' | 'info' | 'warn' | 'trace' | 'error';
 
+@injectable()
 export abstract class logger {
   debug(msg: any): void { return this.log(msg, 'debug'); }
   error(msg: any): void { return this.log(msg, 'error'); }

@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { component, is_component, data } from "../component";
+import { component, is_component, data } from '../component';
 import svc, { site_contact_us_msg } from './svc';
 import { Subscription, Subject } from 'rxjs';
 import { popover_event_arg } from '../popover/event';

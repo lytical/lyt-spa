@@ -13,8 +13,13 @@ import * as _net from 'net';
 import * as _os from 'os';
 import * as _url from 'url';
 import HTTP_STATUS_CODES from 'http-status-enum';
-import { container } from '../ioc';
-import { config, crypto, json_replacer, json_reviver, json, file_invalid_path_pattern, text_color, logger, text } from '../lib';
+import { container } from '../ioc/container';
+import { text_color, text } from '../lib/text';
+import { logger } from '../lib/logger';
+import { file_invalid_path_pattern } from '../lib/fs';
+import { json_replacer, json_reviver, json } from '../lib/json';
+import { crypto } from '../lib/crypto';
+import { config } from '../lib/config';
 import { create_http_error } from './error';
 import { message } from './message';
 import { web_sock } from './web-sock';
@@ -70,6 +75,7 @@ export class mw_app extends _events.EventEmitter {
   async run(ioc?: container): Promise<void> {
     if(!ioc) {
       ioc = new container();
+      ioc.load_injectables(`${__dirname}/..`);
     }
     if(!ioc.get<logger>(logger)) {
       ioc.set(logger, logger.create((msg, level) => {

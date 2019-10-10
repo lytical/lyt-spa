@@ -4,7 +4,7 @@
   please refer to your license agreement on the use of this file.
 */
 
-import { container } from '../ioc';
+import { container } from '../ioc/container';
 
 export abstract class key_manager {
   static add(ioc: container) {
