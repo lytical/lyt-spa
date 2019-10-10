@@ -1,6 +1,9 @@
 # lyt-spa-cli
 the single page application framework, designed for productivity and rapid development.
 designed to utilize [typescript](https://www.typescriptlang.org); [amd (requirejs)](https://requirejs.org); [vuejs](https://vuejs.org); [bootstrap](https://getbootstrap.com); [nodejs](https://nodejs.org) with [expressjs](https://expressjs.com/) or [.net core](https://github.com/dotnet/core)
+
+**note**: this documentation assumes you have knowledge of the *vuejs* framework. you can familiarize yourself with the framework [here](https://vuejs.org/v2/guide/index.html).
+
 ## introduction
 this project is one of three (3) projects of [lyt-spa](/#lyt-spa), and concerns the client-side (front end) implementation of the application.
 vuejs is used to render and control the front end.
@@ -239,9 +242,9 @@ export class focus_directive implements directive {
 ```
 ## forms
 although, not necessary to use, components in the form directory can increase productivity.
-#### form item
+#### form item component
 the most useful component by far, is the `form-item` component.
-it wraps the contained form control in a markup, and provides a visual representation of the control's state, consistent throughout the application.
+it wraps the contained form control in a markup, and provides a visual representation of the control's state, that is consistent throughout the application.
 
 |form item property|description|
 |---|---|
@@ -273,6 +276,27 @@ the following is a typical implementation of a input form.
   <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 ```
+#### status directive
+the *status directive* will update the applied element's *class list* according to the state of form controls that are children of a parent element.
+the parent element can either be the applied, or the element identified by the *selector* argument of the directive.
+a parent form control must be enclosed in a [form-item](#form-item-component) component.
+
+**usage**: <*element* v-form-status[="selector"] />
+
+the **selector** is optional and identifies the parent element of the form controls.
+if the selector argument is omitted, then the applied element is the parent element.
+
+the element *class* of the applied element, can be one or more of the following:
+
+|class name|description|
+|---|---|
+|fi-touched|true when the user has visited any parent control.|
+|fi-dirty|true when the user changed the value of any parent control.|
+|fi-valid|true when all parent controls pass form validation.|
+|fi-pristine|true when the user has not changed the value of any parent control.|
+|fi-invalid|true when any parent control failes form validation.|
+|fi-untouched|true when the user has never visited any parent control.|
+
 ## controls
 todo: ...
 

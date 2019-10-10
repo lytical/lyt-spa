@@ -20,7 +20,7 @@ export class form_status extends directive {
   inserted(el: HTMLElement, binding: form_status_directive_binding, vnode: VNode, oldVnode: VNode): void {
     if(binding.arg) {
       const me = $(el);
-      const item = $(binding.arg).find('div.form-group.row');
+      const item = $(<any>binding.arg || el).find('div.form-group.row');
       const update = (check: string, reciprocal: string) => {
         if(item.filter(function() {
           return $(this).hasClass(check)
