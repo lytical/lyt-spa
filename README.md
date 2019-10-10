@@ -6,13 +6,14 @@ i've been searching (for years) for a solution to a single page application fram
 several years back, i started to use [knockoutjs](https://knockoutjs.com/) to build my clients. i eventually mixed in **amd** (asynchronous module definition).
 before es6, i started to appreciate javascript modules. i then tried [angularjs](https://angularjs.org/); [angular](https://angular.io/); [vuejs](https://vuejs.org/); [reactjs](https://reactjs.org/); ...
 
-all excellent frameworks, but none implemented the way i wanted. i experimented in writing my own framework, but didn't have the resources to complete it. what to do...? i needed to use an existing framework.
+all excellent frameworks, and there are things i like in each, but none implemented the way i want.
+i needed to use a framework, but which one.
 
 should i go back to angular... too much overhead for me. break out the react...? call me old school, i hated mixing html into code. i needed them separated for development. loved knockout, but i needed a more modern approach. so i chose vue.
 can i make vue work for me? it has some quirks i personally didn't like, but i had to figure this out.
 ##### what are my desires?
 - i wanted to develop in **typescript**.
-- preferred to use browser amd loader like **[requirejs](https://requirejs.org/)**.
+- preferred to use a browser amd loader like **[requirejs](https://requirejs.org/)**.
 - i felt **ioc, dependency injection** can be controlled by the browser's module loader, but i wanted an ioc container in my host code.
 - i didn't want to maintain code to **register the application components**. components should be able to "register themselves".
 - i also didn't want to maintain code to **use(...)** all my **express middleware** request handlers. the handlers should be able to "'use' themselves".
@@ -21,6 +22,8 @@ can i make vue work for me? it has some quirks i personally didn't like, but i h
 - intricacies i found in vue needed to be approached differently with typescript constructs.
 - my express application needed to handle **clustering and child process communications**.
 - i wanted host-to-client messaging built in.
+
+...among other desires.
 ## introduction
 lyt-spa is a comprehensive solution to single page web applications. the [repository](https://github.com/lytical/lyt-spa) contains projects for the client api and your choice of either a nodejs or a .net core host.
 the client and node frameworks are written in typescript. the core framework is written in .net core 3.0.

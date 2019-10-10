@@ -24,7 +24,7 @@ export class _default {
 }
 ```
 the [`default.html`](/cli/default.html), along with **all** html template files, must have a single root element.
-```
+```html
 <article>
   <div class="card">
     <div class="card-header"></div>
@@ -69,7 +69,12 @@ import { is_component } from 'component';
 export class product_catalog {
 }
 ```
-i use `keep_alive` on index pages.
+i use `keep_alive` on index pages. use the component in the html template as:
+```html
+<div>
+  <app-product-catalog></app-product-catalog>
+</div>
+```
 #### intellisense using **component interface**
 a component can optionally implement the `component` interface.
 this is especially helpful with 'intellisense / code complete' functionality in your ide.
@@ -105,10 +110,12 @@ so respectively, component names for the above (if all are not decorated with a 
 using these components in your html markup is as simple as:
 ```html
 <!-- my-template.html -->
-<default></default>
-<product-catalog></product-catalog>
-<div is="customer-directory"></div>
-<div is="customer-purchases"></div>
+<div>
+  <default></default>
+  <product-catalog></product-catalog>
+  <div is="customer-directory"></div>
+  <div is="customer-purchases"></div>
+</div>
 ...
 ```
 if you must implement multiple components in a file, only one component can, not have a decorated `name`.
@@ -118,11 +125,20 @@ this allows me to easily identify a component's implementation file, by its name
 you can indicate what data members (class properties) will participate in vue's change tracking (reactivity). [read more...](https://vuejs.org/v2/guide/instance.html#Data-and-Methods)
 vue requires component's `data()` method to return an object containing these members.
 use the `@data()` decorator to indicate what properties are to be tracked.
-decorate the data member(s) of your class and optionally specify an initial *primitive* value.
+decorate the data member(s) of your class and optionally specify an initial value.
 
 **usage**: `@data([value]) <member>: <data type>;`
 
+the data member's value will be `null` if a the decorator's value argument is omitted.
 the following is an example of how to use the `@data()` decorator:
+```html
+<!-- my-template.html -->
+<form role="form">
+  <input type="number" v-model="id"/>
+  <input type="text" autocomplete="name" v-model="name"/>
+  <button type="submit">submit</button>
+</form>
+```
 ```javascript
 import { data, is_component } from 'component';
 
@@ -156,23 +172,45 @@ export class my_component implements component {
 ```
 #### passing data to child components using @property()
 a component can pass data to child components [using props](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props).
-you can add a component data member to the list of *props* by decorating the member with `@property()`.
+you can add a child component data member to the list of *props* by decorating the member with `@property()`.
+once decorated, the child component's data member can be set by the parent html template.
 this decorator takes an optional argument that indicates what type of property it is.
 
 **usage**: `@property([type]) <member>: <data type>;` [read more about type checks](https://vuejs.org/v2/guide/components-props.html#Type-Checks)
+```html
+<!-- child.html -->
+<div :title="title"></div>
+```
 ```javascript
+// child.ts
 import { property, is_component } from 'component';
 
 @is_component({
-  html: 'my-template.html'
+  html: 'child.html'
 })
-export class my_component implements component {
+export class child_component implements component {
   @property(String) title?: string;
 }
+```
+```html
+<!-- parent.html -->
+<div>
+  <child title="title to past to child component"></child>
+</div>
 ```
 #### computed properties
 components implement [vue computed properties](https://vuejs.org/v2/guide/computed.html) with `getter` accessor methods.
 in the following example, the `full_name` (read only) data member will reflect changes when either the `first_name` or the `last_name` data member changes.
+```html
+<!-- my-template.html -->
+<div>
+  <form>
+    <input type="text" autocomplete="given-name" v-model="first_name"/>
+    <input type="text" autocomplete="family-name" v-model="last_name"/>
+  </form>
+  <span>your full name is {{ full_name }}</span>
+</div>
+```
 ```javascript
 import { component, is_component } from 'component';
 
@@ -191,6 +229,15 @@ export class my_component implements component {
 #### watchers
 components implement [vue watchers](https://vuejs.org/v2/guide/computed.html#Watchers) with `setter` accessor methods.
 in the following example, the `message` data member will be updated when the `name` data member changes.
+```html
+<!-- my-template.html -->
+<div>
+  <form>
+    <input type="text" autocomplete="name" v-model="name"/>
+  </form>
+  <span>{{ message }}</span>
+</div>
+```
 ```javascript
 import { component, is_component } from 'component';
 
@@ -208,7 +255,24 @@ export class my_component implements component {
 ```
 #### event handlers
 all (non vue standard) methods in a component are available as [event handlers](https://vuejs.org/v2/guide/events.html).
+```html
+<!-- template.html -->
+<div>
+  <button type="button" @click="send($event)">send</button>
+</div>
+```
+```javascript
+import { is_component } from 'component';
 
+@is_component({
+  html: 'template.html'
+})
+export class my_component {
+  send(event: MouseEvent) {
+    // todo: perform send here...
+  }
+}
+```
 ## custom directives
 developing [custom vue directives](https://vuejs.org/v2/guide/custom-directive.html) are as simple as decorating an exported class with `@is_directive`.
 
@@ -291,12 +355,12 @@ the applied element's *class* attribute, can be one or more of the following:
 
 |class name|description|
 |---|---|
-|fi-touched|true when the user has visited any parent control.|
-|fi-dirty|true when the user changed the value of any parent control.|
-|fi-valid|true when all parent controls pass form validation.|
-|fi-pristine|true when the user has not changed the value of any parent control.|
-|fi-invalid|true when any parent control failes form validation.|
-|fi-untouched|true when the user has never visited any parent control.|
+|fi-touched|when the user has visited any parent control.|
+|fi-dirty|when the user changed the value of any parent control.|
+|fi-valid|when all parent controls pass form validation.|
+|fi-pristine|when the user has not changed the value of any parent control.|
+|fi-invalid|when any parent control failes form validation.|
+|fi-untouched|when the user has never visited any parent control.|
 
 for example, this directive is helpful to style a nav-item (tab; pill; ...) based on the state of associated form.
 
