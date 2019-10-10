@@ -18,12 +18,11 @@ namespace lyt.app
   public class injectableAttribute : Attribute
   {
     public injectableAttribute(injectable_lifetime lifetime = injectable_lifetime.transient, Type type = null)
+      : this(type, lifetime)
     {
-      this.lifetime = lifetime;
-      this.type = type;
     }
 
-    public injectableAttribute(Type type = null, injectable_lifetime lifetime = injectable_lifetime.transient)
+    public injectableAttribute(Type type, injectable_lifetime lifetime = injectable_lifetime.transient)
     {
       this.lifetime = lifetime;
       this.type = type;
