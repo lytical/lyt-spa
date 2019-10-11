@@ -312,20 +312,20 @@ export class focus_directive implements directive {
 }
 ```
 ## forms
-although, not necessary to use, components in the form directory can increase productivity.
-#### form item component
+although, not necessary to use, the form components can increase productivity.
+#### form-item component
 the most useful component by far, is the `form-item` component.
 it wraps the contained form control in a markup, and provides a visual representation of the control's state, that is consistent throughout the application.
 
-|form item property|description|
+|form-item property|description|
 |---|---|
 |caption|the html to display in the item's `<label></label>`.|
 |id|the enclosed form control id.|
 |invalid_msg|optional message to display when the form control fails validation.|
 
-the states of a form item and its element's *class* attribute can be one or more of the following:
+the states of a form-item and its element's *class* attribute can be one or more of the following:
 
-|form item state|description|class name|
+|form-item state|description|class name|
 |---|---|---|
 |is_touched|true when the user has visited the control.|fi-touched|
 |is_dirty|true when the user changed the value of the control.|fi-dirty|
@@ -339,28 +339,35 @@ place the form control within the `<form-item></form-item>` elements.
 the following is a typical implementation of a input form.
 ```html
 <form role="form">
-  <form-item title="your full name." id="name" caption="Your Name:" invalid_msg="This is a required field.">
+  <form-item title="your full name." id="name" caption="your name:" invalid_msg="this is a required field.">
     <input class="form-control" id="name" type="text" required placeholder="(required)" v-model="name" />
   </form-item>
-  <form-item title="your email address." id="email" caption="Email Address:" invalid_msg="This is a required field.">
+  <form-item title="your email address." id="email" caption="email address:" invalid_msg="this is a required field.">
     <input class="form-control" id="email" type="email" required placeholder="(required)" v-model="email" />
   </form-item>
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <button class="btn btn-primary" type="submit">submit</button>
 </form>
 ```
-#### status directive
-the *status directive* will update the applied element's *class list* according to the state of form controls that are children of a parent element.
+#### form-check component
+the `form-check` component extends the [`form-item`](#form-item-component) component for visual representation of `checkbox` or `radio` input controls.
+```html
+<form-check title="can we contact you?" id="can-contact" caption="please contact me">
+  <input id="can-contact" type="checkbox" />
+</form-check>
+```
+#### v-form-status directive
+the `form-status` directive will update the applied element's *class list* according to the state of form controls that are children of a parent element.
 the parent element can either be the applied, or the element identified by the *selector* argument of the directive.
 a parent form control must be enclosed in a [form-item](#form-item-component) component.
 
 **usage**: <*element* v-form-status[:selector] />
 
-the **selector** is optional and identifies the parent element of the form controls.
+the **selector** is optional and identifies the parent element of the form controls to track state changes.
 if the selector argument is omitted, then the applied element is the parent element.
 
 the applied element's *class* attribute, can be one or more of the following:
 
-|class name|description|
+|element class name|description|
 |---|---|
 |fi-touched|when the user has visited any parent control.|
 |fi-untouched|when the user has not visited any parent control.|
