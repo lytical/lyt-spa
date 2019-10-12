@@ -222,10 +222,10 @@ export class mw_app extends _events.EventEmitter {
       ioc.set(config, {});
     }
     if(ioc.get(json_reviver) === undefined) {
-      ioc.set(json_reviver, json.reviver);
+      ioc.set(json_reviver, () => json.reviver);
     }
     if(ioc.get(json_replacer) === undefined) {
-      ioc.set(json_replacer, json.replacer);
+      ioc.set(json_replacer, () => json.replacer);
     }
     let deferred: Promise<any>[] = [];
     this.emit('services-add', ioc, deferred);

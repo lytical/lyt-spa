@@ -27,7 +27,12 @@ export class container {
         return arg;
       }
       if(!/^class\s/.test(Function.prototype.toString.call(arg))) {
-        return arg;
+        let func: (ioc: container) => object | [object] = arg;
+        let rt = func.call(undefined, this);
+        if(Array.isArray(rt) && rt.length) {
+          this.map.set(type, rt[0]);
+        }
+        return rt;
       }
       // it's a class. instantiate and return
       return new arg(...get_method_args(this, arg));
