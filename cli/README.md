@@ -381,7 +381,7 @@ the applied element's *class* attribute, can be one or more of the following:
 
 for example, this directive is helpful to style a nav-item (tab; pill; ...) based on the state of associated form.
 ```css
-/*my-style.css*/
+/* my-style.css */
 div.alert-danger.show-when-invalid.fi-valid-all,
 div.alert-danger.show-when-invalid.fi-untouched-all {
   display: none;
@@ -397,7 +397,6 @@ div.alert-danger.show-when-invalid.fi-invalid.fi-touched {
   <input type="text" required />
 </form>
 ```
-
 ## controls
 todo: ...
 

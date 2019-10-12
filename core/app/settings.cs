@@ -97,8 +97,8 @@ namespace lyt.app
       };
     }
 
-    IWebHostEnvironment _env;
-    ILogger<settings_service> _logger;
+    readonly IWebHostEnvironment _env;
+    readonly ILogger<settings_service> _logger;
     static readonly Regex _html_pattern = new Regex(@"define\(""text!([^\.]+)\.html""");
     static readonly Regex _module_pattern = new Regex(@"define\(""([^""]+)"",");
 #if !DEBUG
@@ -113,13 +113,20 @@ namespace lyt.app
   [ApiController]
   public class settings_controller : ControllerBase
   {
-    public settings_controller(settings_service_i svc) =>
+    public settings_controller(settings_service_i svc, xsrf_token_i xsrf)
+    {
       _svc = svc;
+      _xsrf = xsrf;
+    }
 
     [HttpGet("app/settings")]
-    public Task<settings> get_settings() =>
-      _svc.get_settings(User);
+    public Task<settings> get_settings()
+    {
+      _xsrf.set_token(Response);
+      return _svc.get_settings(User);
+    }
 
     readonly settings_service_i _svc;
+    readonly xsrf_token_i _xsrf;
   }
 }

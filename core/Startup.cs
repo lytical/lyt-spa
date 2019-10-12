@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,10 @@ namespace lyt
 #endif
       _ = services
         .add_lyt_spa()
+        .AddAntiforgery()
+        .AddSignalR()
+        .AddJsonProtocol();
+      _ = services
         .AddControllers(
 #if use_azure_ad
           opt => opt
@@ -59,7 +64,9 @@ namespace lyt
       var cli_path = $"{env.ContentRootPath}/../cli";
       var cli_file_prov = new PhysicalFileProvider(cli_path);
       if(is_dev)
+      {
         _ = app.UseDeveloperExceptionPage();
+      }
       _ = app
         .UseHttpsRedirection()
         .UseDefaultFiles(new DefaultFilesOptions

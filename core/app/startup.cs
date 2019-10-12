@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace lyt.app
 {
@@ -68,7 +72,6 @@ namespace lyt.app
             break;
         }
       }
-      _ = sc.AddSignalR().AddJsonProtocol();
       return sc;
     }
 
