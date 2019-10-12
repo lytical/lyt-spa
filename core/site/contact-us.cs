@@ -44,7 +44,7 @@ namespace lyt.site
 
     [HttpPut("site/contact-us-msg")]
     public Task<bool> handle_msg([FromBody] contact_us_msg body) =>
-      _xsrf.validate_token(HttpContext) ? _svc.handle_msg(body, User) : Task.FromResult(false);
+      _xsrf.validate_token(HttpContext, true) ? _svc.handle_msg(body, User) : Task.FromResult(false);
 
     readonly contact_us_service_i _svc;
     readonly xsrf_token_i _xsrf;

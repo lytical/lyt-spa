@@ -11,7 +11,7 @@ namespace lyt.app
   public interface xsrf_token_i
   {
     public void set_token(HttpResponse response);
-    public bool validate_token(HttpContext context);
+    public bool validate_token(HttpContext context, bool is_required = false);
   }
 
   public class xsrf_token : xsrf_token_i
@@ -19,7 +19,7 @@ namespace lyt.app
     public void set_token(HttpResponse rsp) =>
       rsp.Cookies.Append(xsrf_token_cookie_id, Guid.NewGuid().ToString());
 
-    public bool validate_token(HttpContext ctx)
+    public bool validate_token(HttpContext ctx, bool is_required = false)
     {
       var cookie = ctx.Request.Cookies[xsrf_token_cookie_id];
       if(cookie != null)
@@ -29,6 +29,10 @@ namespace lyt.app
         {
           return true;
         }
+      }
+      else if(!is_required)
+      {
+        return true;
       }
       ctx.Response.StatusCode = (int)HttpStatusCode.BadRequest;
       ctx.Response.CompleteAsync();
