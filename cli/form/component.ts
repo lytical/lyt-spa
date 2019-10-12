@@ -20,7 +20,7 @@ export interface form_model {
   [_: string]: any;
 }
 
-export class form_component implements component, form_model {
+export abstract class form_component implements component, form_model {
   beforeRouteEnter(to: Route, from: Route, next: (to?: (vm: Vue) => any) => void) {
     next(vm => {
       (<form_component>vm).navs.forEach(x => x[0].add(x[1]));

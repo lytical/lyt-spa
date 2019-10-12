@@ -397,12 +397,17 @@ div.alert-danger.show-when-invalid.fi-invalid.fi-touched {
   <input type="text" required />
 </form>
 ```
-## controls
-todo: ...
-
-## popovers
-todo: ...
-
+#### form component base class
+the base class located in `form/component`, contains support for typical form or index, routable component.
+deriving your routable component from this class will provide:
+- consistent functionality across all form and index pages.
+- automatic nav-bar management, for when your component is activated or deactivated.
+- event and confirmation popover support
+- input auto focus
+- confirmation to either abandon modified form(s) or uncompleted host request (xhr), when leaving.
+- auto clean-up/unsubscribe logic when the component is destroyed.
+- multiple form support (e.g. placing `<form></form>` elements in multiple tabs in the html template).
+- submit form; reset form; and or remove entity event handling.
 ## websocket pubsub messaging
 websockets pubsub messaging support for [sockjs](https://www.npmjs.com/package/sockjs) or [signalr](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-3.0) is built in.
 server code can send messages to all web clients, or to a specific client. depending on your server configuration, you can configure the client to receive these message.
