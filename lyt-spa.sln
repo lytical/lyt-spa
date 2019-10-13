@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lyt-spa", "lyt-spa", "{24F3
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "test", "test\test.njsproj", "{DA379150-D18B-4317-8180-FA057EDFE0AA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{7492B479-D480-4FC8-8E1E-0A35BFD3414E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7492B479-D480-4FC8-8E1E-0A35BFD3414E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7492B479-D480-4FC8-8E1E-0A35BFD3414E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA379150-D18B-4317-8180-FA057EDFE0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA379150-D18B-4317-8180-FA057EDFE0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA379150-D18B-4317-8180-FA057EDFE0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA379150-D18B-4317-8180-FA057EDFE0AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
