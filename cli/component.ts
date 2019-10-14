@@ -71,15 +71,24 @@ export function is_component(md: component_metadata) {
     }
     if(has_computed) {
       cstr.prototype.computed = computed;
+      set_data_for(computed, cstr);
     }
     if(has_methods) {
       cstr.prototype.methods = methods;
     }
     if(has_watch) {
       cstr.prototype.watch = watch;
+      set_data_for(watch, cstr);
     }
   };
 };
+
+function set_data_for(props: object, cstr: Function) {
+  const d = data()
+  for(let prop of Object.getOwnPropertyNames(props)) {
+    d(cstr.prototype, prop);
+  }
+}
 
 function get_data_for(target: any): object {
   if(!target) {
@@ -93,7 +102,9 @@ export function data(value: any = null) {
   return (target: any, property: string, descriptor?: PropertyDescriptor) => {
     let md = Object.getOwnPropertyDescriptor(target, component_data_metadata);
     if(md) {
-      md.value[property] = value;
+      if(md.value[property] === undefined) {
+        md.value[property] = value;
+      }
     }
     else {
       let data: any = get_data_for(Object.getPrototypeOf(target));

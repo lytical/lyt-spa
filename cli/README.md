@@ -249,7 +249,6 @@ export class my_component implements component {
     this.message = `hello ${value}!`;
   }
 
-  @data() name!: string;
   @data() message!: string;
 }
 ```
