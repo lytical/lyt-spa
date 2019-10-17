@@ -107,9 +107,6 @@ namespace lyt.app
 #endif
   }
 
-#if use_azure_ad
-  [Authorize]
-#endif
   [ApiController]
   public class settings_controller : ControllerBase
   {

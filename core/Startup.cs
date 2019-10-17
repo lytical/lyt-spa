@@ -25,36 +25,13 @@ namespace lyt
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-#if use_azure_ad
-      _ = services
-        .Configure<CookiePolicyOptions>(options =>
-        {
-          options.CheckConsentNeeded = context => true;
-          options.MinimumSameSitePolicy = SameSiteMode.None;
-        })
-        .Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
-        {
-          options.Authority = $"{options.Authority}/v2.0/";         // Microsoft identity platform
-          options.TokenValidationParameters.ValidateIssuer = false; // accept several tenants (here simplified)
-        })
-        .AddAuthentication(AzureADDefaults.AuthenticationScheme)
-        .AddAzureAD(options => Configuration.Bind("AzureAd", options));
-#endif
       _ = services
         .add_lyt_spa()
         .AddAntiforgery()
         .AddSignalR()
         .AddJsonProtocol();
       _ = services
-        .AddControllers(
-#if use_azure_ad
-          opt => opt
-            .Filters
-            .Add(new AuthorizeFilter(new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
-            .Build()))
-#endif
-        );
+        .AddControllers();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,10 +61,6 @@ namespace lyt
           RequestPath = "/node_modules"
         })
         .UseRouting()
-#if use_azure_ad
-        .UseAuthentication()
-        .UseAuthorization()
-#endif
         .use_lyt_spa()
         .UseEndpoints(endpoints => endpoints.MapControllers());
       if(is_dev)

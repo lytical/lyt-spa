@@ -84,7 +84,7 @@ export function is_component(md: component_metadata) {
 };
 
 function set_data_for(props: object, cstr: Function) {
-  const d = data()
+  const d = data();
   for(let prop of Object.getOwnPropertyNames(props)) {
     d(cstr.prototype, prop);
   }

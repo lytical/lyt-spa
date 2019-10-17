@@ -31,9 +31,6 @@ namespace lyt.app
     readonly IHubContext<pubsub_hub> _hub_ctx;
   }
 
-#if use_azure_ad
-  [Authorize]
-#endif
   [ApiController]
   public class pubsub_controller : ControllerBase
   {

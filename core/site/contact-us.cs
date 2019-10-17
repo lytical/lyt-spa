@@ -30,9 +30,6 @@ namespace lyt.site
     }
   }
 
-#if use_azure_ad
-  [Authorize]
-#endif
   [ApiController]
   public class contact_us_controller : ControllerBase
   {
