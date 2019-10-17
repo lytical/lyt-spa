@@ -1,13 +1,6 @@
 using lyt.app;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -27,7 +20,6 @@ namespace lyt
     {
       _ = services
         .add_lyt_spa()
-        .AddAntiforgery()
         .AddSignalR()
         .AddJsonProtocol();
       _ = services
