@@ -27,19 +27,11 @@ namespace lyt.app
     {
     }
 
-    public injectableAttribute(Func<IServiceProvider, object> factory, injectable_lifetime lifetime = injectable_lifetime.transient)
-    {
-      this.lifetime = lifetime;
-      this.factory = factory;
-    }
-
     public injectableAttribute(Type type, injectable_lifetime lifetime = injectable_lifetime.transient)
     {
       this.lifetime = lifetime;
       this.type = type;
     }
-
-    public Func<IServiceProvider, object> factory { get; set; }
 
     public Type type { get; set; }
 
@@ -64,24 +56,18 @@ namespace lyt.app
           case injectable_lifetime.transient:
             if(attr.type != null)
               sc.AddTransient(type, attr.type);
-            else if(attr.factory != null)
-              sc.AddTransient(type, attr.factory);
             else
               sc.AddTransient(type);
             break;
           case injectable_lifetime.scoped:
             if(attr.type != null)
               sc.AddScoped(type, attr.type);
-            else if(attr.factory != null)
-              sc.AddScoped(type, attr.factory);
             else
               sc.AddScoped(type);
             break;
           case injectable_lifetime.singleton:
             if(attr.type != null)
               sc.AddSingleton(type, attr.type);
-            else if(attr.factory != null)
-              sc.AddSingleton(type, attr.factory);
             else
               sc.AddSingleton(type);
             break;
