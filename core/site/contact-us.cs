@@ -1,5 +1,9 @@
-﻿using lyt.app;
-using Microsoft.AspNetCore.Authorization;
+﻿/*
+  © 2019 lytical, inc. all rights are reserved.
+  lytical® is a registered trademark of lytical, inc.
+  please refer to your license agreement on the use of this file.
+*/
+using lyt.app;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;

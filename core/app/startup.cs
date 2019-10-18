@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿/*
+  © 2019 lytical, inc. all rights are reserved.
+  lytical® is a registered trademark of lytical, inc.
+  please refer to your license agreement on the use of this file.
+*/
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace lyt.app
 {

@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿/*
+  © 2019 lytical, inc. all rights are reserved.
+  lytical® is a registered trademark of lytical, inc.
+  please refer to your license agreement on the use of this file.
+*/
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Net;
 
 namespace lyt.app
 {
