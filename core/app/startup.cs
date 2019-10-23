@@ -54,11 +54,15 @@ namespace lyt.app
         .SelectMany(x => x.GetTypes()))
       {
         foreach(var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(x => x.GetCustomAttribute<add_serviceAttribute>() != null))
+        {
+          var args = method.GetParameters();
+          Debug.Assert(args.Length == 1 && args[0].ParameterType == typeof(IServiceCollection), $"add_service method {type.Name}.{method.Name}, must have only one parameter of type IServiceCollection");
           method.Invoke(null, new object[] { sc });
+        }
         var attr = type.GetCustomAttribute<injectableAttribute>();
         if(attr != null)
         {
-          Debug.Assert((!type.IsInterface && !type.IsAbstract) || attr.type != null, $"injectable interfaces or abstract classes, must indicate an implementation 'type'.");
+          Debug.Assert((!type.IsInterface && !type.IsAbstract) || attr.type != null, $"injectable interfaces or abstract class {type.Name}, must indicate an implementation 'type'.");
           switch(attr.lifetime)
           {
             case injectable_lifetime.transient:
