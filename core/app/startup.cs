@@ -19,6 +19,11 @@ namespace lyt.app
     singleton
   }
 
+  [AttributeUsage(AttributeTargets.Method)]
+  public class add_serviceAttribute : Attribute
+  {
+  }
+
   [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class)]
   public class injectableAttribute : Attribute
   {
@@ -33,9 +38,9 @@ namespace lyt.app
       this.type = type;
     }
 
-    public Type type { get; set; }
+    public Type type { get; }
 
-    public injectable_lifetime lifetime { get; set; }
+    public injectable_lifetime lifetime { get; }
   }
 
   public static class startup
@@ -46,31 +51,35 @@ namespace lyt.app
         .CurrentDomain
         .GetAssemblies()
         .Cast<Assembly>()
-        .SelectMany(x => x.GetTypes())
-        .Where(x => x.GetCustomAttribute(typeof(injectableAttribute)) != null))
+        .SelectMany(x => x.GetTypes()))
       {
-        var attr = (injectableAttribute)type.GetCustomAttribute(typeof(injectableAttribute));
-        Debug.Assert((!type.IsInterface && !type.IsAbstract) || attr.type != null, $"injectable interfaces or abstract classes, must indicate an implementation 'type'.");
-        switch(attr.lifetime)
+        foreach(var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(x => x.GetCustomAttribute<add_serviceAttribute>() != null))
+          method.Invoke(null, new object[] { sc });
+        var attr = type.GetCustomAttribute<injectableAttribute>();
+        if(attr != null)
         {
-          case injectable_lifetime.transient:
-            if(attr.type != null)
-              sc.AddTransient(type, attr.type);
-            else
-              sc.AddTransient(type);
-            break;
-          case injectable_lifetime.scoped:
-            if(attr.type != null)
-              sc.AddScoped(type, attr.type);
-            else
-              sc.AddScoped(type);
-            break;
-          case injectable_lifetime.singleton:
-            if(attr.type != null)
-              sc.AddSingleton(type, attr.type);
-            else
-              sc.AddSingleton(type);
-            break;
+          Debug.Assert((!type.IsInterface && !type.IsAbstract) || attr.type != null, $"injectable interfaces or abstract classes, must indicate an implementation 'type'.");
+          switch(attr.lifetime)
+          {
+            case injectable_lifetime.transient:
+              if(attr.type != null)
+                sc.AddTransient(type, attr.type);
+              else
+                sc.AddTransient(type);
+              break;
+            case injectable_lifetime.scoped:
+              if(attr.type != null)
+                sc.AddScoped(type, attr.type);
+              else
+                sc.AddScoped(type);
+              break;
+            case injectable_lifetime.singleton:
+              if(attr.type != null)
+                sc.AddSingleton(type, attr.type);
+              else
+                sc.AddSingleton(type);
+              break;
+          }
         }
       }
       return sc;
