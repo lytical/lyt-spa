@@ -47,10 +47,16 @@ namespace lyt.app
   {
     public static IServiceCollection add_lyt_spa(this IServiceCollection sc)
     {
+      Debug.Assert(AppDomain.CurrentDomain.IsDefaultAppDomain(), "add_mosaic() must be invoked in default AppDomain.");
       foreach(var type in AppDomain
         .CurrentDomain
         .GetAssemblies()
         .Cast<Assembly>()
+        .Concat(Assembly
+          .GetEntryAssembly()
+          .GetReferencedAssemblies()
+          .Select(x => Assembly.Load(x)))
+        .Distinct()
         .SelectMany(x => x.GetTypes()))
       {
         foreach(var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public).Where(x => x.GetCustomAttribute<add_serviceAttribute>() != null))
