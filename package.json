@@ -21,7 +21,7 @@
     "requirejs": "2.3.6",
     "rxjs": "6.5.2",
     "saslprep": "1.0.3",
-    "sockjs": "^0.3.19",
+    "sockjs": "^0.3.20",
     "sockjs-client": "^1.4.0",
     "uuid": "^3.3.2",
     "vue": "2.6.10",
